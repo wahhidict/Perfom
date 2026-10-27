@@ -27,12 +27,53 @@ body{
 .screen.active{display:flex;flex-direction:column;justify-content:center}
 @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
-.hero{text-align:center;padding:20px 0}
-.hero-badge{display:inline-block;padding:6px 16px;border:1px solid var(--border);border-radius:999px;font-size:13px;color:var(--gold);margin-bottom:24px;letter-spacing:1px;}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,7vw,52px);font-weight:700;line-height:1.2;margin-bottom:18px;background:linear-gradient(135deg,#f5f0e8 0%,var(--gold-l) 50%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-.hero p{color:var(--dim);font-size:17px;margin-bottom:32px;max-width:460px;margin-inline:auto}
-.hero-features{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:32px}
-.hero-features span{font-size:13px;color:var(--dim);padding:6px 12px;border:1px solid rgba(201,168,106,.15);border-radius:8px}
+.hero{text-align:center;padding:10px 0 20px}
+.hero-badge{display:inline-block;padding:6px 16px;border:1px solid var(--border);border-radius:999px;font-size:13px;color:var(--gold);margin-bottom:20px;letter-spacing:1px;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,6vw,46px);font-weight:700;line-height:1.2;margin-bottom:15px;background:linear-gradient(135deg,#f5f0e8 0%,var(--gold-l) 50%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* تنسيق صورة القنينة */
+.hero-image-wrapper {
+  margin: 10px auto 25px;
+  width: 180px;
+  height: 180px;
+  position: relative;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hero-image-wrapper::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,106,0.2) 0%, transparent 70%);
+  z-index: -1;
+  animation: pulse-glow 3s infinite alternate;
+}
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  animation: float 4s ease-in-out infinite;
+}
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+@keyframes pulse-glow {
+  0% { transform: scale(1); opacity: 0.5; }
+  100% { transform: scale(1.2); opacity: 0.8; }
+}
+
+.hero p{color:var(--dim);font-size:16px;margin-bottom:25px;max-width:460px;margin-inline:auto;line-height:1.8}
+.hero-features{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:30px}
+.hero-features span{font-size:12px;color:var(--dim);padding:6px 12px;border:1px solid rgba(201,168,106,.15);border-radius:8px;background:rgba(19,24,36,0.6)}
 
 .btn{display:block;width:100%;padding:18px 28px;border:none;border-radius:14px;font-family:inherit;font-size:17px;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--gold-l) 0%,var(--gold) 50%,var(--gold-d) 100%);color:#0a0e1a;transition:all .3s;box-shadow:0 8px 24px rgba(201,168,106,.25);position:relative;overflow:hidden;}
 .btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(201,168,106,.4)}
@@ -43,10 +84,10 @@ body{
 .progress-info{display:flex;justify-content:space-between;font-size:13px;color:var(--dim);margin-bottom:10px}
 .progress-info strong{color:var(--gold);font-weight:700}
 .progress-bar{height:4px;background:rgba(201,168,106,.15);border-radius:4px;overflow:hidden}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-l));transition:width .5s cubic-bezier(.4,0,.2,1);border-radius:4px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-l));transition:width .5s cubic-bezier(.4,0,.2,1);border-radius:4px;width:0%}
 
 .q-label{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--gold);letter-spacing:2px;margin-bottom:12px;text-transform:uppercase}
-.q-text{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;line-height:1.4;margin-bottom:28px;color:var(--text)}
+.q-text{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;line-height:1.4;margin-bottom:28px;color:var(--text)}
 .choices{display:flex;flex-direction:column;gap:12px}
 .choice{padding:18px 22px;background:var(--bg-2);border:1.5px solid var(--border);border-radius:14px;cursor:pointer;transition:all .25s;font-size:16px;color:var(--text);text-align:right;font-family:inherit;}
 .choice:hover{border-color:var(--gold);background:var(--bg-3);transform:translateX(-4px)}
@@ -54,7 +95,7 @@ body{
 
 .result-head{text-align:center;margin-bottom:24px}
 .result-label{font-size:13px;color:var(--gold);letter-spacing:3px;margin-bottom:8px}
-.result-name{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:700;background:linear-gradient(135deg,var(--gold-l),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;}
+.result-name{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;background:linear-gradient(135deg,var(--gold-l),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;}
 .notes-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:28px}
 .chip{padding:8px 16px;background:rgba(201,168,106,.1);border:1px solid var(--border);border-radius:999px;font-size:14px;color:var(--gold-l)}
 .message-card{background:linear-gradient(135deg,var(--bg-2),var(--bg-3));border:1px solid var(--border);border-radius:18px;padding:28px;margin-bottom:28px;position:relative;overflow:hidden;}
@@ -62,7 +103,7 @@ body{
 .message-card p{font-size:16px;line-height:1.9;color:var(--text);position:relative;z-index:1}
 
 .pkgs{display:flex;flex-direction:column;gap:14px;margin-bottom:24px}
-.pkg{padding:22px;background:var(--bg-2);border:1.5px solid var(--border);border-radius:16px;cursor:pointer;transition:all .25s;position:relative;}
+.pkg{padding:20px;background:var(--bg-2);border:1.5px solid var(--border);border-radius:16px;cursor:pointer;transition:all .25s;position:relative;}
 .pkg:hover{border-color:var(--gold);transform:translateY(-2px)}
 .pkg.selected{border-color:var(--gold);background:rgba(201,168,106,.08);box-shadow:0 0 0 1px var(--gold)}
 .pkg.recommended::before{content:'الأكثر طلباً';position:absolute;top:-10px;left:20px;background:var(--gold);color:#0a0e1a;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;}
@@ -86,9 +127,16 @@ body{
 <body>
 <div id="app">
 
+  <!-- شاشة الترحيب -->
   <section class="screen active" id="s-landing">
     <div class="hero">
       <span class="hero-badge">تجربة عطرية فريدة</span>
+      
+      <!-- الصورة الفخمة للقنينة -->
+      <div class="hero-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=800&auto=format&fit=crop" alt="قنينة عطر فخمة" class="hero-image">
+      </div>
+
       <h1>عطرك مش جاهز…<br>عطرك بينبنى على شخصيتك</h1>
       <p>9 أسئلة سريعة. كل إجابة تضيف مكوّن لعطرك. بالآخر بتشوف خلطتك ومكوناتها.</p>
       <div class="hero-features">
@@ -96,10 +144,11 @@ body{
         <span>✦ تجهيز 2–4 أيام</span>
         <span>✦ دفع عند الاستلام</span>
       </div>
-      <button class="btn" onclick="startQuiz()">ابدأ الاختبار</button>
+      <button class="btn" id="btn-start">ابدأ الاختبار</button>
     </div>
   </section>
 
+  <!-- شاشة الأسئلة -->
   <section class="screen" id="s-quiz">
     <div class="progress-wrap">
       <div class="progress-info">
@@ -113,6 +162,7 @@ body{
     <div class="choices" id="q-choices"></div>
   </section>
 
+  <!-- شاشة النتيجة -->
   <section class="screen" id="s-result">
     <div class="result-head">
       <div class="result-label">خلطتك الخاصة</div>
@@ -120,16 +170,18 @@ body{
       <div class="notes-chips" id="r-notes"></div>
     </div>
     <div class="message-card"><p id="r-message"></p></div>
-    <button class="btn" onclick="goToPackages()">اختر باقتك</button>
+    <button class="btn" id="btn-to-packages">اختر باقتك</button>
   </section>
 
+  <!-- شاشة الباقات -->
   <section class="screen" id="s-packages">
     <span class="step-badge">الخطوة 2 من 3</span>
     <h2 class="q-text">اختر حجم عطرك</h2>
     <div class="pkgs" id="pkg-list"></div>
-    <button class="btn" id="btn-next-pkg" onclick="goToForm()" disabled style="opacity:0.5">التالي</button>
+    <button class="btn" id="btn-next-pkg" style="opacity:0.5" disabled>التالي</button>
   </section>
 
+  <!-- شاشة البيانات -->
   <section class="screen" id="s-form">
     <span class="step-badge">الخطوة 3 من 3</span>
     <h2 class="q-text">بياناتك للتوصيل</h2>
@@ -144,9 +196,10 @@ body{
         </select>
       </div>
     </div>
-    <button class="btn" onclick="submitOrder()">تأكيد الطلب عبر واتساب</button>
+    <button class="btn" id="btn-submit">تأكيد الطلب عبر واتساب</button>
   </section>
 
+  <!-- شاشة الشكر -->
   <section class="screen" id="s-thanks">
     <div class="thanks">
       <div class="thanks-icon">✓</div>
@@ -226,4 +279,151 @@ const BLENDS = {
   oud: {name:'خلطة الأثر',key:'OUD',notes:['عود','عنبر','مسك أبيض'],message:'في ناس بيدخلوا المكان بيضجّوا، وناس بيدخلوا بيسكتوا المكان. أنت من النوع التاني. عودك ما هو صراخ — هو ذاك الهدوء اللي بيخلي الناس تلتفت وتسأل: مين هاد؟ لأن فيك أصالة ما بتنشرى، وحضور ما بينطلب. اللي بيعرفك بيعرف إنك أصل، والباقي بيكتشفوا متأخر.'},
   amber: {name:'خلطة الدفء',key:'AMBER',notes:['عنبر','فانيلا','مسك ناعم'],message:'أنت من الناس اللي بيرجعوا إلهم لما الدنيا تتعب. مش لأنك بتعطي وعود، بل لأنك بتعطي دفء. عنبرك هو هالحضن اللي ما بيتغير — دافي، ثابت، موجود بلا شروط. يمكن ما بتحكي كثير عن حبك، بس كل اللي حواليك بيعرفوه من إحساسهم معك. وهاد، صدقني، أندر من أي كلمة حلوة.'},
   wood: {name:'خلطة الجذور',key:'WOOD',notes:['صندل','أرز','فيتيفر'],message:'فيك شي نادر بهاد الزمن: إنك بتعرف كثير، وما بتحتاج تحكي. خشبك هو هالهدوء — دفء ما بيعلي صوته، بس كل اللي حواليك بيحسوا فيه. أنت الشخص اللي الناس بترتاح جنبه بلا ما تعرف ليش. هاد مو ضعف — هاد عمق. والعمق ما بينشاف، بينحس.'},
-  musk: {name:'خلطة النقاء',key:
+  musk: {name:'خلطة النقاء',key:'MUSK',notes:['مسك أبيض','نيرولي','صندل'],message:'فيك طيبة ما بتحتاج تثبت حالها. من النوع اللي بيعمل الخير وبيمشي، بلا ما ينتظر شكر. مسكك الأبيض هو هالنقاء — نظيف، هادي، بيلمس الروح قبل الحواس. أنت من الناس اللي بيثقوا فيهم من أول لحظة، لأن فيك صفاء ما بيتصنّع.'},
+  fresh: {name:'خلطة النسمة',key:'FRESH',notes:['برغموت','ملح بحري','نعنع'],message:'فيك طاقة بدايات. كأنك كل صباح بتولد من جديد، بقلب خفيف ونية صافية. نسمتك هي هالحيوية — حمضية مشرقة، بتفتح المزاج وبتقول للحياة: يلا. أنت الشخص اللي بيصحّي اللي حواليه، مش بوعظ، بل بإحساسه إنه كل يوم فرصة.'},
+  floral: {name:'خلطة الرقة',key:'FLORAL',notes:['ورد طائفي','ياسمين','فريزيا'],message:'رقتك أقوى مما بيظن الناس. كتير ناس بتشوف الهدوء ضعف، بس أنت بتعرف إنه الهدوء قوة بتتعب أقل. وردك هو هالرقة — دافية، فيها وفاء ما بيتغير. أنت الشخص اللي بيضل جنب اللي بيحبهم، بهدوء، بلا ضجّة، بلا شروط.'},
+  spicy: {name:'خلطة الجرأة',key:'SPICY',notes:['زعفران','فلفل','قرفة'],message:'فيك شي ما بينلقى بسهولة. إجاباتك حكيت عن جرأة هادية، عن شخص بيعرف قيمته بلا ما يحتاج يثبتها لحدا. زعفرانك هو هالندرة — غالي، مميز، وما بيتشبه بحدا. أنت من الناس اللي بيمرقوا بالحياة وبيتركوا أثر.'},
+  sweet: {name:'خلطة الحلاوة',key:'SWEET',notes:['فانيلا','عسل','تونكا'],message:'أنت بتعطي بلا ما تحسب. حبك، وقتك، اهتمامك — كله بيجي من قلب مفتوح. حلاوتك هي هالعطاء — طبيعية، دافية، بلا تصنّع. إجاباتك حكيت عن شخص بيهمه يسعد اللي حواليه، وأحياناً بينسى حالو. بس اسمح لي قلك: أنت كمان بتستاهل حدا يعطيك.'},
+  leather: {name:'خلطة الدرع',key:'LEATHER',notes:['جلد','عود','باتشولي'],message:'أنت درع للي بتحبهم. ما بتحكي كثير عن مشاعرك، بس أفعالك بتحكي. جلدك هو هالحماية — قوي، دافي، فيه نبض حياة. إجاباتك حكيت عن شخص بيحمي اللي حواليه بلا ما يطلب مقابل. في ناس بتحب بالكلام، وأنت من الناس اللي بتحب بالأفعال.'},
+  chypre: {name:'خلطة الحكمة',key:'CHYPRE',notes:['برغموت','باتشولي','طحلب بلوط'],message:'فيك شي قديم… مش بالعمر، بالروح. كأنك جاي من زمن كان فيه عمق أكثر، وسكوت أدفى. حكمتك هي هالغموض اللي حواليك — أرضي، عميق، فيه سر ما بتحكي عنه. الناس بتقرب منك وهي حاسة إنها لسا ما اكتشفتك كلياً.'}
+};
+
+// ═══════════ المنطق ═══════════
+let state = { answers:{}, questions:[], current:0, blend:null, pkgKey:null };
+const $ = id => document.getElementById(id);
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  $(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function startQuiz(){
+  state = { answers:{}, questions:[], current:0, blend:null, pkgKey:null };
+  state.questions = [
+    QUESTION_BANK.first_impression[0], QUESTION_BANK.memory[0], QUESTION_BANK.energy[0],
+    QUESTION_BANK.hidden[0], QUESTION_BANK.style[0], QUESTION_BANK.occasion[0]
+  ];
+  showScreen('s-quiz');
+  renderQuestion();
+}
+
+function ensureQuestionAt(idx){
+  while(state.questions.length <= idx){
+    const next = state.questions.length;
+    if(next === 6){
+      const fi1 = state.answers['fi_1']||'';
+      state.questions.push((fi1.includes('حضوري')||fi1.includes('ريحتي')) ? QUESTION_BANK.first_impression[4] : QUESTION_BANK.first_impression[2]);
+    } else if(next === 7){
+      const mem1 = state.answers['mem_1']||'';
+      state.questions.push((mem1.includes('بخور')||mem1.includes('ورد')) ? QUESTION_BANK.memory[3] : QUESTION_BANK.memory[5]);
+    } else if(next === 8){
+      const en1 = state.answers['en_1']||'';
+      state.questions.push((en1.includes('نار')||en1.includes('تراب')) ? QUESTION_BANK.energy[5] : QUESTION_BANK.energy[3]);
+    } else {
+      state.questions.push(QUESTION_BANK.style[1]);
+    }
+  }
+}
+
+function renderQuestion(){
+  ensureQuestionAt(state.current);
+  const q = state.questions[state.current];
+  $('q-num').textContent = state.current + 1;
+  $('q-pct').textContent = Math.round((state.current/9)*100) + '%';
+  $('q-fill').style.width = ((state.current/9)*100) + '%';
+  $('q-text').textContent = q.text;
+  const choices = $('q-choices');
+  choices.innerHTML = '';
+  q.choices.forEach(c=>{
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.textContent = c;
+    if(state.answers[q.id] === c) btn.classList.add('selected');
+    btn.onclick = () => {
+      state.answers[q.id] = c;
+      document.querySelectorAll('.choice').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      setTimeout(()=>{
+        state.current++;
+        if(state.current < 9){ renderQuestion(); } else { finishQuiz(); }
+      }, 250);
+    };
+    choices.appendChild(btn);
+  });
+}
+
+function finishQuiz(){
+  const scores = {};
+  for(const qid in state.answers){
+    const q = Object.values(QUESTION_BANK).flat().find(x=>x.id===qid);
+    if(!q) continue;
+    const w = q.weights[state.answers[qid]];
+    if(!w) continue;
+    for(const fam in w) scores[fam] = (scores[fam]||0) + w[fam];
+  }
+  const ordered = TIE_ORDER.filter(f=>scores[f]).sort((a,b)=>(scores[b]||0)-(scores[a]||0));
+  state.blend = BLENDS[ordered[0]];
+  $('q-fill').style.width = '100%';
+  $('q-pct').textContent = '100%';
+  $('r-name').textContent = state.blend.name;
+  $('r-notes').innerHTML = state.blend.notes.map(n=>`<span class="chip">${n}</span>`).join('');
+  $('r-message').textContent = state.blend.message;
+  showScreen('s-result');
+}
+
+function goToPackages(){
+  const list = $('pkg-list');
+  list.innerHTML = '';
+  ['special','signature','basic'].forEach(k=>{
+    const p = CONFIG.packages[k];
+    const div = document.createElement('div');
+    div.className = 'pkg' + (k==='signature'?' recommended':'');
+    div.innerHTML = `<div class="pkg-name">${p.name}</div><div class="pkg-size">${p.size} ml</div><div class="pkg-price">${p.price}</div>`;
+    div.onclick = () => {
+      document.querySelectorAll('.pkg').forEach(x=>x.classList.remove('selected'));
+      div.classList.add('selected');
+      state.pkgKey = k;
+      $('btn-next-pkg').disabled = false;
+      $('btn-next-pkg').style.opacity = '1';
+    };
+    list.appendChild(div);
+  });
+  showScreen('s-packages');
+}
+
+function goToForm(){ if(state.pkgKey) showScreen('s-form'); }
+
+function submitOrder(){
+  const name = $('f-name').value.trim();
+  const phone = $('f-phone').value.trim();
+  const address = $('f-address').value.trim();
+  const gender = $('f-gender').value;
+  if(!name || !phone || !address){ alert('الرجاء تعبئة كل الحقول'); return; }
+  const pkg = CONFIG.packages[state.pkgKey];
+  const code = `${state.blend.key}-${pkg.size}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
+  const msg = [
+    '🛒 *طلب جديد*', '━━━━━━━━━━━━━━━',
+    `👤 الاسم: ${name}`, `📱 الموبايل: ${phone}`, `📍 العنوان: ${address}`,
+    '━━━━━━━━━━━━━━━',
+    `🎯 الخلطة: ${state.blend.name}`, `🧪 النوتات: ${state.blend.notes.join(' + ')}`,
+    `📦 الباقة: ${pkg.name} (${pkg.size}ml)`, `💰 السعر: ${pkg.price}`, `🎁 النوع: ${gender}`,
+    '━━━━━━━━━━━━━━━',
+    `🔖 كود الطلب: *${code}*`,
+    '━━━━━━━━━━━━━━━',
+    '💵 الدفع: عند الاستلام'
+  ].join('\n');
+  window.location.href = `https://wa.me/${CONFIG.phone}?text=${encodeURIComponent(msg)}`;
+  setTimeout(()=>{ showScreen('s-thanks'); }, 1000);
+}
+
+// ═══════════ ربط الأزرار (عشان نضمن إنها تشتغل 100%) ═══════════
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('btn-start').addEventListener('click', startQuiz);
+  document.getElementById('btn-to-packages').addEventListener('click', goToPackages);
+  document.getElementById('btn-next-pkg').addEventListener('click', goToForm);
+  document.getElementById('btn-submit').addEventListener('click', submitOrder);
+});
+</script>
+</body>
+</html>
