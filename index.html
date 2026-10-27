@@ -2,276 +2,232 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>عطرك بينبنى على شخصيتك</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>اكتشف توقيعك العطري</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0a0e1a; --bg-2:#131824; --bg-3:#1c2230;
-  --gold:#c9a86a; --gold-l:#e0c48a; --gold-d:#9d8350;
+  --bg:#07090f; --bg-2:#121620; --bg-3:#1a1f2e;
+  --gold:#d4af37; --gold-l:#f3e5ab; --gold-d:#a67c00;
   --text:#f5f0e8; --dim:#8a8578;
-  --border:rgba(201,168,106,.22);
+  --border:rgba(212,175,55,.25);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html,body{height:100%}
 body{
   font-family:'Tajawal',system-ui,sans-serif;
-  background:radial-gradient(ellipse at top,#131824 0%,#0a0e1a 70%);
+  background:radial-gradient(ellipse at top,#121620 0%,#07090f 100%);
   color:var(--text); min-height:100vh; line-height:1.7;
   overflow-x:hidden; -webkit-font-smoothing:antialiased;
+  display: flex; justify-content: center;
 }
-#app{max-width:640px;margin:0 auto;padding:24px;min-height:100vh;display:flex;flex-direction:column}
-.screen{display:none;flex:1;animation:fadeIn .5s ease}
+#app{width:100%;max-width:600px;padding:24px;min-height:100vh;display:flex;flex-direction:column;position:relative}
+.screen{display:none;flex:1;animation:fadeIn .6s ease forwards;width: 100%;}
 .screen.active{display:flex;flex-direction:column;justify-content:center}
-@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:none}}
+@keyframes float{0%{transform:translateY(0px)}50%{transform:translateY(-10px)}100%{transform:translateY(0px)}}
+@keyframes spin{100%{transform:rotate(360deg)}}
+@keyframes pulse-glow{0%{box-shadow:0 0 20px rgba(212,175,55,.1)}50%{box-shadow:0 0 40px rgba(212,175,55,.3)}100%{box-shadow:0 0 20px rgba(212,175,55,.1)}}
 
-.hero{text-align:center;padding:10px 0 20px}
-.hero-badge{display:inline-block;padding:6px 16px;border:1px solid var(--border);border-radius:999px;font-size:13px;color:var(--gold);margin-bottom:20px;letter-spacing:1px;}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,6vw,46px);font-weight:700;line-height:1.2;margin-bottom:15px;background:linear-gradient(135deg,#f5f0e8 0%,var(--gold-l) 50%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+/* Landing Page */
+.hero{text-align:center;padding:20px 0}
+.hero-badge{display:inline-block;padding:8px 20px;border:1px solid var(--border);border-radius:999px;font-size:13px;color:var(--gold);margin-bottom:25px;letter-spacing:2px;background:rgba(212,175,55,.05)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,7vw,48px);font-weight:700;line-height:1.2;margin-bottom:20px;background:linear-gradient(135deg,#f5f0e8 0%,var(--gold-l) 50%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero p{color:var(--dim);font-size:16px;margin-bottom:30px;max-width:400px;margin-inline:auto;line-height:1.8}
 
-/* تنسيق صورة القنينة */
-.hero-image-wrapper {
-  margin: 10px auto 25px;
-  width: 180px;
-  height: 180px;
-  position: relative;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.hero-image-wrapper::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(201,168,106,0.2) 0%, transparent 70%);
-  z-index: -1;
-  animation: pulse-glow 3s infinite alternate;
-}
-.hero-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid var(--border);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  animation: float 4s ease-in-out infinite;
-}
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0px); }
-}
-@keyframes pulse-glow {
-  0% { transform: scale(1); opacity: 0.5; }
-  100% { transform: scale(1.2); opacity: 0.8; }
-}
+.hero-image-wrapper {margin: 0 auto 30px;width: 160px;height: 160px;position: relative;border-radius: 50%;display: flex;align-items: center;justify-content: center;}
+.hero-image {width: 100%;height: 100%;object-fit: cover;border-radius: 50%;border: 1px solid var(--gold);padding: 5px;animation: float 5s ease-in-out infinite;}
+.hero-image-wrapper::before {content: '';position: absolute;width: 120%;height: 120%;border-radius: 50%;background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%);z-index: -1;animation: pulse-glow 3s infinite alternate;}
 
-.hero p{color:var(--dim);font-size:16px;margin-bottom:25px;max-width:460px;margin-inline:auto;line-height:1.8}
-.hero-features{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:30px}
-.hero-features span{font-size:12px;color:var(--dim);padding:6px 12px;border:1px solid rgba(201,168,106,.15);border-radius:8px;background:rgba(19,24,36,0.6)}
+/* Buttons */
+.btn{display:flex;align-items:center;justify-content:center;width:100%;padding:18px 28px;border:none;border-radius:16px;font-family:inherit;font-size:17px;font-weight:700;cursor:pointer;transition:all .3s;position:relative;overflow:hidden;}
+.btn-primary{background:linear-gradient(135deg,var(--gold-l) 0%,var(--gold) 50%,var(--gold-d) 100%);color:#07090f;box-shadow:0 10px 30px rgba(212,175,55,.2);}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 15px 40px rgba(212,175,55,.4)}
+.btn-ghost{background:rgba(255,255,255,.03);color:var(--text);border:1px solid var(--border);backdrop-filter:blur(10px);}
+.btn-ghost:hover{background:rgba(212,175,55,.1);border-color:var(--gold)}
+.btn-group{display:flex;flex-direction:column;gap:14px;margin-top:20px}
 
-.btn{display:block;width:100%;padding:18px 28px;border:none;border-radius:14px;font-family:inherit;font-size:17px;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--gold-l) 0%,var(--gold) 50%,var(--gold-d) 100%);color:#0a0e1a;transition:all .3s;box-shadow:0 8px 24px rgba(201,168,106,.25);position:relative;overflow:hidden;}
-.btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(201,168,106,.4)}
-.btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);transition:left .6s;}
-.btn:hover::after{left:100%}
-
-.progress-wrap{margin-bottom:32px}
-.progress-info{display:flex;justify-content:space-between;font-size:13px;color:var(--dim);margin-bottom:10px}
-.progress-info strong{color:var(--gold);font-weight:700}
-.progress-bar{height:4px;background:rgba(201,168,106,.15);border-radius:4px;overflow:hidden}
-.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-l));transition:width .5s cubic-bezier(.4,0,.2,1);border-radius:4px;width:0%}
-
-.q-label{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--gold);letter-spacing:2px;margin-bottom:12px;text-transform:uppercase}
-.q-text{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;line-height:1.4;margin-bottom:28px;color:var(--text)}
+/* Quiz */
+.progress-wrap{margin-bottom:35px}
+.progress-info{display:flex;justify-content:space-between;font-size:13px;color:var(--dim);margin-bottom:12px}
+.progress-info strong{color:var(--gold)}
+.progress-bar{height:4px;background:rgba(255,255,255,.05);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-l));transition:width .5s ease;border-radius:4px;width:0%}
+.q-text{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;line-height:1.4;margin-bottom:30px;color:var(--text)}
 .choices{display:flex;flex-direction:column;gap:12px}
-.choice{padding:18px 22px;background:var(--bg-2);border:1.5px solid var(--border);border-radius:14px;cursor:pointer;transition:all .25s;font-size:16px;color:var(--text);text-align:right;font-family:inherit;}
-.choice:hover{border-color:var(--gold);background:var(--bg-3);transform:translateX(-4px)}
-.choice.selected{border-color:var(--gold);background:rgba(201,168,106,.12);box-shadow:0 0 0 1px var(--gold)}
+.choice{padding:18px 20px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:16px;cursor:pointer;transition:all .3s;font-size:16px;color:var(--text);text-align:right;font-family:inherit;backdrop-filter:blur(10px);}
+.choice:hover{border-color:var(--gold);background:rgba(212,175,55,.08);transform:translateX(-5px)}
+.choice.selected{border-color:var(--gold);background:rgba(212,175,55,.15);box-shadow:0 0 20px rgba(212,175,55,.1)}
 
+/* Analysis Overlay */
+.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(7,9,15,.95);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;backdrop-filter:blur(10px);transition:opacity .5s;}
+.overlay.hidden{opacity:0;pointer-events:none}
+.spinner{width:60px;height:60px;border:3px solid rgba(212,175,55,.1);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite;margin-bottom:24px}
+.overlay h2{color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:24px;animation:pulse 1.5s infinite alternate}
+@keyframes pulse{from{opacity:.7}to{opacity:1}}
+
+/* Result */
 .result-head{text-align:center;margin-bottom:24px}
-.result-label{font-size:13px;color:var(--gold);letter-spacing:3px;margin-bottom:8px}
-.result-name{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:700;background:linear-gradient(135deg,var(--gold-l),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;}
-.notes-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:28px}
-.chip{padding:8px 16px;background:rgba(201,168,106,.1);border:1px solid var(--border);border-radius:999px;font-size:14px;color:var(--gold-l)}
-.message-card{background:linear-gradient(135deg,var(--bg-2),var(--bg-3));border:1px solid var(--border);border-radius:18px;padding:28px;margin-bottom:28px;position:relative;overflow:hidden;}
-.message-card::before{content:'"';position:absolute;top:-20px;right:14px;font-size:120px;font-family:'Cormorant Garamond',serif;color:rgba(201,168,106,.08);}
-.message-card p{font-size:16px;line-height:1.9;color:var(--text);position:relative;z-index:1}
+.result-label{font-size:14px;color:var(--gold);letter-spacing:3px;margin-bottom:10px}
+.result-name{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:700;background:linear-gradient(135deg,var(--gold-l),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:20px;}
+.notes-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:30px}
+.chip{padding:8px 16px;background:rgba(212,175,55,.1);border:1px solid var(--border);border-radius:999px;font-size:14px;color:var(--gold-l)}
+.message-card{background:linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid var(--border);border-radius:20px;padding:30px;margin-bottom:30px;position:relative;overflow:hidden;backdrop-filter:blur(10px);}
+.message-card::before{content:'"';position:absolute;top:-30px;right:10px;font-size:140px;font-family:'Cormorant Garamond',serif;color:rgba(212,175,55,.05);}
+.message-card p{font-size:16px;line-height:2;color:var(--text);position:relative;z-index:1}
 
-.pkgs{display:flex;flex-direction:column;gap:14px;margin-bottom:24px}
-.pkg{padding:20px;background:var(--bg-2);border:1.5px solid var(--border);border-radius:16px;cursor:pointer;transition:all .25s;position:relative;}
-.pkg:hover{border-color:var(--gold);transform:translateY(-2px)}
-.pkg.selected{border-color:var(--gold);background:rgba(201,168,106,.08);box-shadow:0 0 0 1px var(--gold)}
-.pkg.recommended::before{content:'الأكثر طلباً';position:absolute;top:-10px;left:20px;background:var(--gold);color:#0a0e1a;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;}
-.pkg-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--text);margin-bottom:4px}
-.pkg-size{font-size:13px;color:var(--dim);margin-bottom:10px}
-.pkg-price{font-size:20px;font-weight:700;color:var(--gold)}
+/* Packages */
+.pkgs{display:flex;flex-direction:column;gap:16px;margin-bottom:30px}
+.pkg{padding:24px;background:rgba(255,255,255,.02);border:1.5px solid var(--border);border-radius:20px;cursor:pointer;transition:all .3s;position:relative;backdrop-filter:blur(10px);}
+.pkg:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.pkg.selected{border-color:var(--gold);background:rgba(212,175,55,.08);box-shadow:0 0 30px rgba(212,175,55,.15)}
+.pkg.recommended::before{content:'الأكثر طلباً';position:absolute;top:-12px;left:24px;background:var(--gold);color:#07090f;font-size:12px;font-weight:800;padding:4px 14px;border-radius:999px;box-shadow:0 4px 10px rgba(212,175,55,.3)}
+.pkg-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.pkg-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;color:var(--text)}
+.pkg-size{font-size:13px;color:var(--dim);background:rgba(255,255,255,.05);padding:4px 10px;border-radius:8px}
+.pkg-price-row{display:flex;align-items:center;gap:10px}
+.pkg-price-old{font-size:14px;color:#777;text-decoration:line-through}
+.pkg-price{font-size:22px;font-weight:800;color:var(--gold)}
+.scarcity{margin-top:15px;font-size:13px;color:#ff6b6b;display:flex;align-items:center;gap:6px}
 
-.form{display:flex;flex-direction:column;gap:14px;margin-bottom:24px}
-.field label{display:block;font-size:13px;color:var(--dim);margin-bottom:6px}
-.field input,.field textarea,.field select{width:100%;padding:14px 18px;background:var(--bg-2);border:1.5px solid var(--border);border-radius:12px;color:var(--text);font-family:inherit;font-size:15px;transition:border-color .2s;resize:none;}
-.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--gold)}
-.field input::placeholder,.field textarea::placeholder{color:#555;}
+/* Form */
+.form{display:flex;flex-direction:column;gap:16px;margin-bottom:30px}
+.field label{display:block;font-size:13px;color:var(--dim);margin-bottom:8px;margin-right:4px}
+.field input,.field textarea,.field select{width:100%;padding:16px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;color:var(--text);font-family:inherit;font-size:15px;transition:border-color .3s;}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--gold);background:rgba(212,175,55,.05)}
+.field input::placeholder{color:#555}
 
+/* Thanks */
 .thanks{text-align:center;padding:40px 20px}
-.thanks-icon{width:80px;height:80px;margin:0 auto 24px;border-radius:50%;background:rgba(201,168,106,.12);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:40px;color:var(--gold);}
-.thanks h2{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--gold);margin-bottom:12px}
-.thanks p{color:var(--dim);font-size:16px;max-width:400px;margin:0 auto}
-.step-badge{display:inline-block;padding:4px 12px;background:rgba(201,168,106,.1);border:1px solid var(--border);border-radius:999px;font-size:12px;color:var(--gold);margin-bottom:16px;align-self:flex-start;}
+.thanks-icon{width:90px;height:90px;margin:0 auto 30px;border-radius:50%;background:rgba(212,175,55,.1);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:45px;color:var(--gold);box-shadow:0 0 30px rgba(212,175,55,.2)}
+.thanks h2{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold);margin-bottom:15px}
+.thanks p{color:var(--dim);font-size:16px;max-width:350px;margin:0 auto;line-height:1.8}
 </style>
 </head>
 <body>
+
+<div id="analyzing-overlay" class="overlay hidden">
+  <div class="spinner"></div>
+  <h2 id="analyzing-text">جاري تحليل الإجابات...</h2>
+</div>
+
 <div id="app">
 
-  <!-- شاشة الترحيب -->
+  <!-- 1. شاشة الترحيب المحايدة -->
   <section class="screen active" id="s-landing">
     <div class="hero">
-      <span class="hero-badge">تجربة عطرية فريدة</span>
+      <span class="hero-badge">تجربة عطرية مخصصة</span>
       
-      <!-- الصورة الفخمة للقنينة -->
       <div class="hero-image-wrapper">
-        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=800&auto=format&fit=crop" alt="قنينة عطر فخمة" class="hero-image">
+        <img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?q=80&w=800&auto=format&fit=crop" alt="عطر فخم" class="hero-image">
       </div>
 
-      <h1>عطرك مش جاهز…<br>عطرك بينبنى على شخصيتك</h1>
-      <p>9 أسئلة سريعة. كل إجابة تضيف مكوّن لعطرك. بالآخر بتشوف خلطتك ومكوناتها.</p>
-      <div class="hero-features">
-        <span>✦ خلطة تحمل اسمك</span>
-        <span>✦ تجهيز 2–4 أيام</span>
-        <span>✦ دفع عند الاستلام</span>
+      <h1>لكل شخص توقيع..<br>وما حدا بيشبه حدا</h1>
+      <p>9 أسئلة قصيرة تحلل الشخصية، وبالآخر نصنع خلطة عطرية خاصة جداً، ما بتتشابه مع أي عطر تاني.</p>
+      
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="startFlow('self')">أريد عطراً لنفسي</button>
+        <button class="btn btn-ghost" onclick="startFlow('gift')">أبحث عن هدية مميزة</button>
       </div>
-      <button class="btn" id="btn-start">ابدأ الاختبار</button>
     </div>
   </section>
 
-  <!-- شاشة الأسئلة -->
+  <!-- 2. شاشة الأسئلة -->
   <section class="screen" id="s-quiz">
     <div class="progress-wrap">
       <div class="progress-info">
+        <span id="q-mode-label">لأجلك شخصياً</span>
         <span>السؤال <strong id="q-num">1</strong> من <strong>9</strong></span>
-        <span id="q-pct">0%</span>
       </div>
       <div class="progress-bar"><div class="progress-fill" id="q-fill"></div></div>
     </div>
-    <div class="q-label" id="q-label">اختر ما يشبهك</div>
     <h2 class="q-text" id="q-text"></h2>
     <div class="choices" id="q-choices"></div>
   </section>
 
-  <!-- شاشة النتيجة -->
+  <!-- 3. شاشة النتيجة -->
   <section class="screen" id="s-result">
     <div class="result-head">
-      <div class="result-label">خلطتك الخاصة</div>
+      <div class="result-label" id="r-label">خلطتك الخاصة</div>
       <div class="result-name" id="r-name"></div>
       <div class="notes-chips" id="r-notes"></div>
     </div>
     <div class="message-card"><p id="r-message"></p></div>
-    <button class="btn" id="btn-to-packages">اختر باقتك</button>
+    <button class="btn btn-primary" onclick="goToPackages()">اختر إصدارك الآن</button>
   </section>
 
-  <!-- شاشة الباقات -->
+  <!-- 4. شاشة الباقات -->
   <section class="screen" id="s-packages">
-    <span class="step-badge">الخطوة 2 من 3</span>
-    <h2 class="q-text">اختر حجم عطرك</h2>
+    <h2 class="q-text" style="text-align:center;margin-bottom:5px">اختر حجم الإصدار</h2>
+    <p style="text-align:center;color:var(--dim);font-size:14px;margin-bottom:30px">جميع الإصدارات تأتي بعلبة فاخرة وبطاقة تحمل اسمك</p>
     <div class="pkgs" id="pkg-list"></div>
-    <button class="btn" id="btn-next-pkg" style="opacity:0.5" disabled>التالي</button>
+    <button class="btn btn-primary" id="btn-next-pkg" style="opacity:0.3" disabled>التالي</button>
   </section>
 
-  <!-- شاشة البيانات -->
+  <!-- 5. شاشة البيانات -->
   <section class="screen" id="s-form">
-    <span class="step-badge">الخطوة 3 من 3</span>
-    <h2 class="q-text">بياناتك للتوصيل</h2>
+    <h2 class="q-text" style="text-align:center;margin-bottom:25px">معلومات التوصيل</h2>
     <div class="form">
-      <div class="field"><label>الاسم الكامل</label><input id="f-name" placeholder="مثلاً: سامر أحمد"></div>
+      <div class="field"><label>الاسم الكامل</label><input id="f-name" placeholder="الاسم الثلاثي"></div>
       <div class="field"><label>رقم الموبايل (واتساب)</label><input id="f-phone" type="tel" placeholder="09xxxxxxxx"></div>
-      <div class="field"><label>العنوان الكامل</label><textarea id="f-address" rows="2" placeholder="المدينة، الحي، الشارع…"></textarea></div>
-      <div class="field"><label>النوع</label>
-        <select id="f-gender">
-          <option value="إله شخصياً">إله شخصياً</option>
-          <option value="هدية">هدية</option>
-        </select>
-      </div>
+      <div class="field"><label>العنوان الكامل</label><textarea id="f-address" rows="2" placeholder="المدينة، الحي، الشارع..."></textarea></div>
     </div>
-    <button class="btn" id="btn-submit">تأكيد الطلب عبر واتساب</button>
+    <button class="btn btn-primary" onclick="submitOrder()">تأكيد الطلب عبر واتساب</button>
   </section>
 
-  <!-- شاشة الشكر -->
+  <!-- 6. شاشة الشكر -->
   <section class="screen" id="s-thanks">
     <div class="thanks">
       <div class="thanks-icon">✓</div>
-      <h2>تم استلام طلبك</h2>
-      <p>رح نتواصل معك على واتساب خلال ساعة لتأكيد التفاصيل وموعد التوصيل.</p>
+      <h2>تم تسجيل طلبك</h2>
+      <p>جاري تحويلك للواتساب لتأكيد التفاصيل. سيتواصل معك فريقنا لتأكيد موعد التوصيل.</p>
     </div>
   </section>
 
 </div>
 
 <script>
-// ═══════════ البيانات ═══════════
-const CONFIG = {
-  phone: '963945333924',
-  packages: {
-    basic:    { name: 'الباقة الأساسية', size: 30,  price: '150,000 ل.س' },
-    signature:{ name: 'باقة التوقيع',    size: 50,  price: '250,000 ل.س' },
-    special:  { name: 'الإصدار الخاص',   size: 100, price: '450,000 ل.س' }
-  }
+// ═══════════ الإعدادات ═══════════
+const CONFIG = { phone: '963945333924' };
+
+const PACKAGES = {
+  basic:    { name: 'الإصدار الأساسي', size: 30, price: '150,000', oldPrice: '200,000' },
+  signature:{ name: 'إصدار التوقيع', size: 50, price: '250,000', oldPrice: '350,000', recommended: true },
+  special:  { name: 'الإصدار الخاص', size: 100, price: '450,000', oldPrice: '600,000' }
 };
 
-const TIE_ORDER = ['oud','amber','wood','musk','fresh','floral','spicy','sweet','leather','chypre'];
-const Q = (id, text, choices, weights) => ({id, text, choices, weights});
+// ═══════════ البيانات (الأسئلة والخلطات) ═══════════
+const Q = (id, t_self, choices, weights, t_gift) => ({id, text_self: t_self, choices, weights, text_gift: t_gift});
 
-const QUESTION_BANK = {
-  first_impression: [
-    Q('fi_1','أول ما تدخل مكان، شو بتحب يلاحظوه فيك؟',['حضوري القوي','أناقتي الهادية','هدوئي العميق','ريحتي المميزة'],{'حضوري القوي':{oud:3,amber:2,spicy:1},'أناقتي الهادية':{wood:3,musk:2,fresh:1},'هدوئي العميق':{musk:3,wood:2,floral:1},'ريحتي المميزة':{fresh:3,floral:2,amber:1}}),
-    Q('fi_2','لما تكون بمجلس، وين بتقعد؟',['بالصدر، الكل بيشوفني','بجنب، براقب الجو','بالنص، بربط الناس','قريب من الباب'],{'بالصدر، الكل بيشوفني':{oud:3,spicy:2,amber:1},'بجنب، براقب الجو':{wood:3,leather:2,musk:1},'بالنص، بربط الناس':{amber:3,floral:2,sweet:1},'قريب من الباب':{fresh:3,musk:2,wood:1}}),
-    Q('fi_3','شو بيلفتك أول مرة بشخص؟',['وقفته وثقته','أناقته وتفاصيله','صوته وهدوءه','ريحته'],{'وقفته وثقته':{oud:3,leather:2,spicy:1},'أناقته وتفاصيله':{wood:3,chypre:2,musk:1},'صوته وهدوءه':{musk:3,wood:2,floral:1},'ريحته':{fresh:3,amber:2,floral:1}}),
-    Q('fi_4','كيف بتدخل غرفة فيها ناس ما بتعرفهن؟',['بسلم على الكل','بسكت لحدا يحكي','بختار شخص واحد','بمرق بهدوء'],{'بسلم على الكل':{amber:3,sweet:2,floral:1},'بسكت لحدا يحكي':{wood:3,musk:2,leather:1},'بختار شخص واحد':{musk:3,wood:2,fresh:1},'بمرق بهدوء':{oud:3,wood:2,leather:1}}),
-    Q('fi_5','لو وصفت حضورك بكلمة؟',['هيبة','أناقة','دفء','غموض'],{'هيبة':{oud:3,leather:2,spicy:1},'أناقة':{wood:3,chypre:2,musk:1},'دفء':{amber:3,sweet:2,musk:1},'غموض':{oud:2,leather:3,wood:2}}),
-    Q('fi_6','شو بتحب الناس تتذكره فيك؟',['كلمتك','ابتسامتك','إحساسك','ريحتك'],{'كلمتك':{wood:3,leather:2,spicy:1},'ابتسامتك':{floral:3,sweet:2,amber:1},'إحساسك':{amber:3,musk:2,wood:1},'ريحتك':{fresh:3,oud:2,floral:1}})
+const QB = {
+  fi: [
+    Q('fi_1','أول ما تدخل مكان، شو بتحب يلاحظوه فيك؟',['حضوري القوي','أناقتي الهادية','هدوئي العميق','ريحتي المميزة'],{'حضوري القوي':{oud:3,amber:2,spicy:1},'أناقتي الهادية':{wood:3,musk:2,fresh:1},'هدوئي العميق':{musk:3,wood:2,floral:1},'ريحتي المميزة':{fresh:3,floral:2,amber:1}}, 'أول ما بيدخل مكان، شو بتحب يلاحظوه فيه؟'),
+    Q('fi_3','شو بيلفتك أول مرة بشخص؟',['وقفته وثقته','أناقته وتفاصيله','صوته وهدوءه','ريحته'],{'وقفته وثقته':{oud:3,leather:2,spicy:1},'أناقته وتفاصيله':{wood:3,chypre:2,musk:1},'صوته وهدوءه':{musk:3,wood:2,floral:1},'ريحته':{fresh:3,amber:2,floral:1}}, 'شو بيلفتك أول مرة بشخص؟'),
+    Q('fi_4','كيف بتدخل غرفة فيها ناس ما بتعرفهن؟',['بسلم على الكل بضحكة','بسكت لحدا يحكي معي','بختار شخص واحد وبحكي معه','بمرق بهدوء وبقعد بزاوية'],{'بسلم على الكل بضحكة':{amber:3,sweet:2,floral:1},'بسكت لحدا يحكي معي':{wood:3,musk:2,leather:1},'بختار شخص واحد وبحكي معه':{musk:3,wood:2,fresh:1},'بمرق بهدوء وبقعد بزاوية':{oud:3,wood:2,leather:1}}, 'كيف بيدخل غرفة فيها ناس ما بيعرفهن؟'),
+    Q('fi_5','لو وصفت حضورك بكلمة؟',['هيبة','أناقة','دفء','غموض'],{'هيبة':{oud:3,leather:2,spicy:1},'أناقة':{wood:3,chypre:2,musk:1},'دفء':{amber:3,sweet:2,musk:1},'غموض':{oud:2,leather:3,wood:2}}, 'لو وصفت حضوره بكلمة؟')
   ],
-  memory: [
-    Q('mem_1','أي رائحة بتعيدك لأحلى ذكرى؟',['بخور وبيت الجدة','بحر وهوا','ورد وحديقة','مطر وتراب'],{'بخور وبيت الجدة':{amber:3,oud:2,spicy:1},'بحر وهوا':{fresh:3,musk:2,wood:1},'ورد وحديقة':{floral:3,sweet:2,musk:1},'مطر وتراب':{wood:3,chypre:2,musk:1}}),
-    Q('mem_2','وين بتحس حالك "أنت"؟',['بيت قديم وحجارة','شاطئ ومساحة','غرفة هادية','سوق وزحمة'],{'بيت قديم وحجارة':{oud:3,amber:2,wood:1},'شاطئ ومساحة':{fresh:3,musk:2,wood:1},'غرفة هادية':{wood:3,musk:2,chypre:1},'سوق وزحمة':{spicy:3,amber:2,leather:1}}),
-    Q('mem_3','أي موسم بيشبهك؟',['شتا ودفء','ربيع وانتعاش','صيف وحرية','خريف وهدوء'],{'شتا ودفء':{amber:3,oud:2,sweet:1},'ربيع وانتعاش':{floral:3,fresh:2,musk:1},'صيف وحرية':{fresh:3,musk:2,floral:1},'خريف وهدوء':{wood:3,chypre:2,leather:1}}),
-    Q('mem_4','أي وقت بتحب تنعيش فيه؟',['الفجر','الضحى','المغرب','الليل'],{'الفجر':{fresh:3,floral:2,musk:1},'الضحى':{fresh:2,floral:2,sweet:1,amber:1},'المغرب':{amber:3,wood:2,floral:1},'الليل':{oud:3,leather:2,amber:1}}),
-    Q('mem_5','شو ما بتنساه من طفولتك؟',['ريحة مطبخ أمي','صوت المطر','لعب بالتراب','بحر بالصيف'],{'ريحة مطبخ أمي':{amber:3,sweet:2,spicy:1},'صوت المطر':{wood:3,chypre:2,musk:1},'لعب بالتراب':{wood:2,fresh:2,musk:2},'بحر بالصيف':{fresh:3,musk:2,floral:1}}),
-    Q('mem_6','أي ذكرى بتحب ترجع إلها؟',['حضن دافي','ضحكة مع صحاب','سكون لحالك','لحظة نجاح'],{'حضن دافي':{amber:3,musk:2,sweet:1},'ضحكة مع صحاب':{floral:3,sweet:2,fresh:1},'سكون لحالك':{wood:3,musk:2,chypre:1},'لحظة نجاح':{oud:3,leather:2,spicy:1}})
+  mem: [
+    Q('mem_1','أي رائحة بتعيدك لأحلى ذكرى؟',['بخور وبيت الجدة','بحر وهوا','ورد وحديقة','مطر وتراب'],{'بخور وبيت الجدة':{amber:3,oud:2,spicy:1},'بحر وهوا':{fresh:3,musk:2,wood:1},'ورد وحديقة':{floral:3,sweet:2,musk:1},'مطر وتراب':{wood:3,chypre:2,musk:1}}, 'أي رائحة بتعيده لأحلى ذكرى؟'),
+    Q('mem_4','أي وقت بتحب تنعيش فيه؟',['الفجر، لما الدنيا بتصحى','الضحى، لما كل شي بيضوي','المغرب، لما الدنيا بتهدى','الليل، لما كل شي بيسكت'],{'الفجر، لما الدنيا بتصحى':{fresh:3,floral:2,musk:1},'الضحى، لما كل شي بيضوي':{fresh:2,floral:2,sweet:1,amber:1},'المغرب، لما الدنيا بتهدى':{amber:3,wood:2,floral:1},'الليل، لما كل شي بيسكت':{oud:3,leather:2,amber:1}}, 'أي وقت بتحب ينعاش فيه؟'),
+    Q('mem_6','أي ذكرى بتحب ترجع إلها؟',['حضن دافي','ضحكة مع صحاب','سكون لحالك','لحظة نجاح وفخر'],{'حضن دافي':{amber:3,musk:2,sweet:1},'ضحكة مع صحاب':{floral:3,sweet:2,fresh:1},'سكون لحالك':{wood:3,musk:2,chypre:1},'لحظة نجاح وفخر':{oud:3,leather:2,spicy:1}}, 'أي ذكرى بتحب يرجع إلها؟')
   ],
-  energy: [
-    Q('en_1','طاقتك أقرب لوين؟',['نار','هوا','ماء','تراب'],{'نار':{amber:3,spicy:2,oud:1},'هوا':{fresh:3,musk:2,floral:1},'ماء':{musk:3,wood:2,fresh:1},'تراب':{wood:3,oud:2,leather:1}}),
-    Q('en_2','كيف بتتعامل مع الضغط؟',['بواجه بصراحة','بسكت وبفكر','بحكي مع حدا قريب','بمشي لحالي'],{'بواجه بصراحة':{leather:3,spicy:2,oud:1},'بسكت وبفكر':{wood:3,musk:2,chypre:1},'بحكي مع حدا قريب':{amber:3,musk:2,sweet:1},'بمشي لحالي':{fresh:3,wood:2,musk:1}}),
-    Q('en_3','شو بيعبيك طاقة؟',['نجاح وطموح','حب وناس','سكون وطبيعة','حرية وسفر'],{'نجاح وطموح':{oud:3,leather:2,spicy:1},'حب وناس':{amber:3,floral:2,sweet:1},'سكون وطبيعة':{wood:3,musk:2,chypre:1},'حرية وسفر':{fresh:3,musk:2,wood:1}}),
-    Q('en_4','لو تكون حيوان؟',['أسد','حصان','قط','طير'],{'أسد':{oud:3,leather:2,spicy:1},'حصان':{fresh:3,wood:2,musk:1},'قط':{musk:3,oud:2,wood:1},'طير':{fresh:2,floral:2,musk:2}}),
-    Q('en_5','أي لون بيشبهك؟',['أسود عميق','أبيض نقي','بني دافي','أحمر غامق'],{'أسود عميق':{oud:3,leather:2,wood:1},'أبيض نقي':{musk:3,fresh:2,floral:1},'بني دافي':{amber:3,wood:2,sweet:1},'أحمر غامق':{spicy:3,floral:2,amber:1}}),
-    Q('en_6','شو بيخليك تحس حالك حي؟',['إنجاز صعب','لحظة حب','سكون بعد تعب','مغامرة'],{'إنجاز صعب':{oud:3,spicy:2,leather:1},'لحظة حب':{amber:3,floral:2,musk:1},'سكون بعد تعب':{wood:3,musk:2,chypre:1},'مغامرة':{fresh:3,spicy:2,musk:1}})
+  en: [
+    Q('en_1','طاقتك أقرب لوين؟',['نار - حرارة وقوة','هوا - حرية وخفة','ماء - عمق وهدوء','تراب - ثبات وأصل'],{'نار - حرارة وقوة':{amber:3,spicy:2,oud:1},'هوا - حرية وخفة':{fresh:3,musk:2,floral:1},'ماء - عمق وهدوء':{musk:3,wood:2,fresh:1},'تراب - ثبات وأصل':{wood:3,oud:2,leather:1}}, 'طاقته أقرب لوين؟'),
+    Q('en_4','لو تكون حيوان، شو بتحب تكون؟',['أسد - هيبة','حصان - حرية','قط - غموض','طير - خفة'],{'أسد - هيبة':{oud:3,leather:2,spicy:1},'حصان - حرية':{fresh:3,wood:2,musk:1},'قط - غموض':{musk:3,oud:2,wood:1},'طير - خفة':{fresh:2,floral:2,musk:2}}, 'لو يكون حيوان، شو بتحب يكون؟'),
+    Q('en_6','شو بيخليك تحس حالك حي؟',['إنجاز صعب','لحظة حب','سكون بعد تعب','مغامرة جديدة'],{'إنجاز صعب':{oud:3,spicy:2,leather:1},'لحظة حب':{amber:3,floral:2,musk:1},'سكون بعد تعب':{wood:3,musk:2,chypre:1},'مغامرة جديدة':{fresh:3,spicy:2,musk:1}}, 'شو بيخليه يحس حاله حي؟')
   ],
-  hidden: [
-    Q('hid_1','شو ما بيبين عليك أول لقاء؟',['جرأة','حنين','طموح','رومانسية'],{'جرأة':{leather:3,spicy:2,oud:1},'حنين':{amber:3,sweet:2,musk:1},'طموح':{oud:3,wood:2,leather:1},'رومانسية':{floral:3,sweet:2,musk:1}}),
-    Q('hid_2','شو بتخبيه عن الناس؟',['ضعفي','حبي','خوفي','طموحي'],{'ضعفي':{musk:3,wood:2,amber:1},'حبي':{floral:3,amber:2,sweet:1},'خوفي':{wood:3,oud:2,musk:1},'طموحي':{oud:3,leather:2,spicy:1}}),
-    Q('hid_3','لو حدا شافك منيح، شو بيكتشف؟',['قلب كبير','عقل حاد','روح حرة','إرادة قوية'],{'قلب كبير':{amber:3,floral:2,musk:1},'عقل حاد':{wood:3,chypre:2,leather:1},'روح حرة':{fresh:3,musk:2,wood:1},'إرادة قوية':{oud:3,leather:2,spicy:1}}),
-    Q('hid_4','شو أكتر شي بتخاف منه؟',['الخيانة','الفشل','الوحدة','الروتين'],{'الخيانة':{leather:3,oud:2,wood:1},'الفشل':{oud:2,wood:3,spicy:1},'الوحدة':{amber:3,musk:2,floral:1},'الروتين':{fresh:3,spicy:2,floral:1}}),
-    Q('hid_5','شو ما بتسمح لحدا يلمسه فيك؟',['كرامتي','أهلي','مبادئي','حريتي'],{'كرامتي':{oud:3,leather:2,wood:1},'أهلي':{amber:3,musk:2,leather:1},'مبادئي':{wood:3,leather:2,chypre:1},'حريتي':{fresh:3,musk:2,wood:1}}),
-    Q('hid_6','لو تعرف حالك بكلمة؟',['قوي','حساس','غامض','طيب'],{'قوي':{oud:3,leather:2,wood:1},'حساس':{floral:3,musk:2,amber:1},'غامض':{oud:2,leather:2,musk:2},'طيب':{amber:3,musk:2,sweet:1}})
+  hid: [
+    Q('hid_1','شو ما بيبين عليك أول لقاء؟',['جرأة','حنين','طموح','رومانسية'],{'جرأة':{leather:3,spicy:2,oud:1},'حنين':{amber:3,sweet:2,musk:1},'طموح':{oud:3,wood:2,leather:1},'رومانسية':{floral:3,sweet:2,musk:1}}, 'شو ما بيبين عليه أول لقاء؟'),
+    Q('hid_3','لو حدا شافك منيح، شو بيكتشف؟',['قلب كبير','عقل حاد','روح حرة','إرادة قوية'],{'قلب كبير':{amber:3,floral:2,musk:1},'عقل حاد':{wood:3,chypre:2,leather:1},'روح حرة':{fresh:3,musk:2,wood:1},'إرادة قوية':{oud:3,leather:2,spicy:1}}, 'لو حدا شافه منيح، شو بيكتشف؟')
   ],
-  style: [
-    Q('sty_1','كيف بتحب تُكتشف؟',['فوراً','على مراحل','غامض','واضح ومريح'],{'فوراً':{fresh:3,spicy:2,oud:1},'على مراحل':{wood:3,amber:2,musk:1},'غامض':{oud:3,leather:2,wood:1},'واضح ومريح':{musk:3,fresh:2,floral:1}}),
-    Q('sty_2','أسلوبك باللبس؟',['كلاسيكي أنيق','رياضي مريح','غريب ومميز','بسيط ونظيف'],{'كلاسيكي أنيق':{wood:3,chypre:2,oud:1},'رياضي مريح':{fresh:3,musk:2,wood:1},'غريب ومميز':{spicy:3,leather:2,floral:1},'بسيط ونظيف':{musk:3,fresh:2,wood:1}}),
-    Q('sty_3','أكسسوار واحد بس؟',['ساعة فخمة','خاتم بسيط','سلسلة','عطر'],{'ساعة فخمة':{oud:3,wood:2,leather:1},'خاتم بسيط':{musk:3,wood:2,chypre:1},'سلسلة':{spicy:2,floral:2,fresh:2},'عطر':{oud:2,amber:2,fresh:2,floral:2}}),
-    Q('sty_4','كيف بتختار عطرك؟',['بسمع اسم الماركة','بشم وبختار','حدا بختارلي','بجرب شي جديد'],{'بسمع اسم الماركة':{oud:3,wood:2,leather:1},'بشم وبختار':{musk:3,amber:2,floral:1},'حدا بختارلي':{amber:3,sweet:2,floral:1},'بجرب شي جديد':{fresh:3,spicy:2,floral:1}}),
-    Q('sty_5','شو بيهمك بالعطر؟',['قوته وثباته','تميزه','راحته','قصته'],{'قوته وثباته':{oud:3,amber:2,spicy:1},'تميزه':{spicy:3,leather:2,floral:1},'راحته':{musk:3,fresh:2,wood:1},'قصته':{floral:3,amber:2,wood:1}}),
-    Q('sty_6','لو تسمي عطرك؟',['أثر','غموض','دفء','حياة'],{'أثر':{oud:3,leather:2,wood:1},'غموض':{oud:2,musk:2,leather:2},'دفء':{amber:3,sweet:2,musk:1},'حياة':{fresh:3,floral:2,sweet:1}})
+  sty: [
+    Q('sty_1','كيف بتحب تُكتشف؟',['فوراً، بلا لف ودوران','على مراحل، شوي شوي','غامض، ما حد بيعرفك كلياً','واضح ومريح'],{'فوراً، بلا لف ودوران':{fresh:3,spicy:2,oud:1},'على مراحل، شوي شوي':{wood:3,amber:2,musk:1},'غامض، ما حد بيعرفك كلياً':{oud:3,leather:2,wood:1},'واضح ومريح':{musk:3,fresh:2,floral:1}}, 'كيف بتحب يكون اكتشافه؟'),
+    Q('sty_2','شو أسلوبك باللبس؟',['كلاسيكي أنيق','رياضي مريح','غريب ومميز','بسيط ونظيف'],{'كلاسيكي أنيق':{wood:3,chypre:2,oud:1},'رياضي مريح':{fresh:3,musk:2,wood:1},'غريب ومميز':{spicy:3,leather:2,floral:1},'بسيط ونظيف':{musk:3,fresh:2,wood:1}}, 'شو أسلوبه باللبس؟')
   ],
-  occasion: [
-    Q('occ_1','وين بتشوف عطرك أكتر؟',['نهار وشغل','ليل وسهر','مناسبات','كل يوم'],{'نهار وشغل':{fresh:3,musk:2,wood:1},'ليل وسهر':{oud:3,amber:2,spicy:1},'مناسبات':{floral:3,oud:2,sweet:1},'كل يوم':{musk:3,fresh:2,wood:1}}),
-    Q('occ_2','أي مناسبة بتحبها؟',['عرس واحتفال','سهرة هادية','قهوة مع صحاب','لحظة لحالك'],{'عرس واحتفال':{floral:3,sweet:2,amber:1},'سهرة هادية':{oud:3,leather:2,amber:1},'قهوة مع صحاب':{amber:3,sweet:2,musk:1},'لحظة لحالك':{wood:3,musk:2,chypre:1}}),
-    Q('occ_3','أي جو بتحس فيه حالك أحلى؟',['مطر وبرد','شمس ودفء','هوا ونسيم','سكون وليل'],{'مطر وبرد':{wood:3,amber:2,chypre:1},'شمس ودفء':{floral:3,sweet:2,fresh:1},'هوا ونسيم':{fresh:3,musk:2,floral:1},'سكون وليل':{oud:3,musk:2,wood:1}}),
-    Q('occ_4','شو بتحب تشرب؟',['قهوة سادة','شاي بالنعنع','عصير فواكه','ماء بارد'],{'قهوة سادة':{oud:3,sweet:2,wood:1},'شاي بالنعنع':{fresh:3,musk:2,spicy:1},'عصير فواكه':{floral:3,sweet:2,fresh:1},'ماء بارد':{fresh:3,musk:2,wood:1}}),
-    Q('occ_5','لو تعزم حدا؟',['قهوة عربية وتمر','شاي وحلويات','عصير وفواكه','شي مميز'],{'قهوة عربية وتمر':{amber:3,oud:2,spicy:1},'شاي وحلويات':{sweet:3,floral:2,musk:1},'عصير وفواكه':{fresh:3,floral:2,musk:1},'شي مميز':{spicy:3,leather:2,floral:1}}),
-    Q('occ_6','وقت الفراغ؟',['قراءة وهدوء','رياضة وحركة','طلعات وناس','أفلام وبيت'],{'قراءة وهدوء':{wood:3,musk:2,chypre:1},'رياضة وحركة':{fresh:3,spicy:2,wood:1},'طلعات وناس':{amber:3,floral:2,sweet:1},'أفلام وبيت':{sweet:3,musk:2,amber:1}})
+  occ: [
+    Q('occ_1','وين بتشوف عطرك أكتر؟',['نهار وشغل','ليل وسهر','مناسبات خاصة','كل يوم'],{'نهار وشغل':{fresh:3,musk:2,wood:1},'ليل وسهر':{oud:3,amber:2,spicy:1},'مناسبات خاصة':{floral:3,oud:2,sweet:1},'كل يوم':{musk:3,fresh:2,wood:1}}, 'وين بتشوف عطره أكتر؟'),
+    Q('occ_4','شو بتحب تشرب أكتر؟',['قهوة سادة','شاي بالنعنع','عصير فواكه','ماء بارد'],{'قهوة سادة':{oud:3,sweet:2,wood:1},'شاي بالنعنع':{fresh:3,musk:2,spicy:1},'عصير فواكه':{floral:3,sweet:2,fresh:1},'ماء بارد':{fresh:3,musk:2,wood:1}}, 'شو بيحب يشرب أكتر؟')
   ]
 };
 
@@ -284,146 +240,4 @@ const BLENDS = {
   floral: {name:'خلطة الرقة',key:'FLORAL',notes:['ورد طائفي','ياسمين','فريزيا'],message:'رقتك أقوى مما بيظن الناس. كتير ناس بتشوف الهدوء ضعف، بس أنت بتعرف إنه الهدوء قوة بتتعب أقل. وردك هو هالرقة — دافية، فيها وفاء ما بيتغير. أنت الشخص اللي بيضل جنب اللي بيحبهم، بهدوء، بلا ضجّة، بلا شروط.'},
   spicy: {name:'خلطة الجرأة',key:'SPICY',notes:['زعفران','فلفل','قرفة'],message:'فيك شي ما بينلقى بسهولة. إجاباتك حكيت عن جرأة هادية، عن شخص بيعرف قيمته بلا ما يحتاج يثبتها لحدا. زعفرانك هو هالندرة — غالي، مميز، وما بيتشبه بحدا. أنت من الناس اللي بيمرقوا بالحياة وبيتركوا أثر.'},
   sweet: {name:'خلطة الحلاوة',key:'SWEET',notes:['فانيلا','عسل','تونكا'],message:'أنت بتعطي بلا ما تحسب. حبك، وقتك، اهتمامك — كله بيجي من قلب مفتوح. حلاوتك هي هالعطاء — طبيعية، دافية، بلا تصنّع. إجاباتك حكيت عن شخص بيهمه يسعد اللي حواليه، وأحياناً بينسى حالو. بس اسمح لي قلك: أنت كمان بتستاهل حدا يعطيك.'},
-  leather: {name:'خلطة الدرع',key:'LEATHER',notes:['جلد','عود','باتشولي'],message:'أنت درع للي بتحبهم. ما بتحكي كثير عن مشاعرك، بس أفعالك بتحكي. جلدك هو هالحماية — قوي، دافي، فيه نبض حياة. إجاباتك حكيت عن شخص بيحمي اللي حواليه بلا ما يطلب مقابل. في ناس بتحب بالكلام، وأنت من الناس اللي بتحب بالأفعال.'},
-  chypre: {name:'خلطة الحكمة',key:'CHYPRE',notes:['برغموت','باتشولي','طحلب بلوط'],message:'فيك شي قديم… مش بالعمر، بالروح. كأنك جاي من زمن كان فيه عمق أكثر، وسكوت أدفى. حكمتك هي هالغموض اللي حواليك — أرضي، عميق، فيه سر ما بتحكي عنه. الناس بتقرب منك وهي حاسة إنها لسا ما اكتشفتك كلياً.'}
-};
-
-// ═══════════ المنطق ═══════════
-let state = { answers:{}, questions:[], current:0, blend:null, pkgKey:null };
-const $ = id => document.getElementById(id);
-
-function showScreen(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  $(id).classList.add('active');
-  window.scrollTo(0,0);
-}
-
-function startQuiz(){
-  state = { answers:{}, questions:[], current:0, blend:null, pkgKey:null };
-  state.questions = [
-    QUESTION_BANK.first_impression[0], QUESTION_BANK.memory[0], QUESTION_BANK.energy[0],
-    QUESTION_BANK.hidden[0], QUESTION_BANK.style[0], QUESTION_BANK.occasion[0]
-  ];
-  showScreen('s-quiz');
-  renderQuestion();
-}
-
-function ensureQuestionAt(idx){
-  while(state.questions.length <= idx){
-    const next = state.questions.length;
-    if(next === 6){
-      const fi1 = state.answers['fi_1']||'';
-      state.questions.push((fi1.includes('حضوري')||fi1.includes('ريحتي')) ? QUESTION_BANK.first_impression[4] : QUESTION_BANK.first_impression[2]);
-    } else if(next === 7){
-      const mem1 = state.answers['mem_1']||'';
-      state.questions.push((mem1.includes('بخور')||mem1.includes('ورد')) ? QUESTION_BANK.memory[3] : QUESTION_BANK.memory[5]);
-    } else if(next === 8){
-      const en1 = state.answers['en_1']||'';
-      state.questions.push((en1.includes('نار')||en1.includes('تراب')) ? QUESTION_BANK.energy[5] : QUESTION_BANK.energy[3]);
-    } else {
-      state.questions.push(QUESTION_BANK.style[1]);
-    }
-  }
-}
-
-function renderQuestion(){
-  ensureQuestionAt(state.current);
-  const q = state.questions[state.current];
-  $('q-num').textContent = state.current + 1;
-  $('q-pct').textContent = Math.round((state.current/9)*100) + '%';
-  $('q-fill').style.width = ((state.current/9)*100) + '%';
-  $('q-text').textContent = q.text;
-  const choices = $('q-choices');
-  choices.innerHTML = '';
-  q.choices.forEach(c=>{
-    const btn = document.createElement('button');
-    btn.className = 'choice';
-    btn.textContent = c;
-    if(state.answers[q.id] === c) btn.classList.add('selected');
-    btn.onclick = () => {
-      state.answers[q.id] = c;
-      document.querySelectorAll('.choice').forEach(b=>b.classList.remove('selected'));
-      btn.classList.add('selected');
-      setTimeout(()=>{
-        state.current++;
-        if(state.current < 9){ renderQuestion(); } else { finishQuiz(); }
-      }, 250);
-    };
-    choices.appendChild(btn);
-  });
-}
-
-function finishQuiz(){
-  const scores = {};
-  for(const qid in state.answers){
-    const q = Object.values(QUESTION_BANK).flat().find(x=>x.id===qid);
-    if(!q) continue;
-    const w = q.weights[state.answers[qid]];
-    if(!w) continue;
-    for(const fam in w) scores[fam] = (scores[fam]||0) + w[fam];
-  }
-  const ordered = TIE_ORDER.filter(f=>scores[f]).sort((a,b)=>(scores[b]||0)-(scores[a]||0));
-  state.blend = BLENDS[ordered[0]];
-  $('q-fill').style.width = '100%';
-  $('q-pct').textContent = '100%';
-  $('r-name').textContent = state.blend.name;
-  $('r-notes').innerHTML = state.blend.notes.map(n=>`<span class="chip">${n}</span>`).join('');
-  $('r-message').textContent = state.blend.message;
-  showScreen('s-result');
-}
-
-function goToPackages(){
-  const list = $('pkg-list');
-  list.innerHTML = '';
-  ['special','signature','basic'].forEach(k=>{
-    const p = CONFIG.packages[k];
-    const div = document.createElement('div');
-    div.className = 'pkg' + (k==='signature'?' recommended':'');
-    div.innerHTML = `<div class="pkg-name">${p.name}</div><div class="pkg-size">${p.size} ml</div><div class="pkg-price">${p.price}</div>`;
-    div.onclick = () => {
-      document.querySelectorAll('.pkg').forEach(x=>x.classList.remove('selected'));
-      div.classList.add('selected');
-      state.pkgKey = k;
-      $('btn-next-pkg').disabled = false;
-      $('btn-next-pkg').style.opacity = '1';
-    };
-    list.appendChild(div);
-  });
-  showScreen('s-packages');
-}
-
-function goToForm(){ if(state.pkgKey) showScreen('s-form'); }
-
-function submitOrder(){
-  const name = $('f-name').value.trim();
-  const phone = $('f-phone').value.trim();
-  const address = $('f-address').value.trim();
-  const gender = $('f-gender').value;
-  if(!name || !phone || !address){ alert('الرجاء تعبئة كل الحقول'); return; }
-  const pkg = CONFIG.packages[state.pkgKey];
-  const code = `${state.blend.key}-${pkg.size}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
-  const msg = [
-    '🛒 *طلب جديد*', '━━━━━━━━━━━━━━━',
-    `👤 الاسم: ${name}`, `📱 الموبايل: ${phone}`, `📍 العنوان: ${address}`,
-    '━━━━━━━━━━━━━━━',
-    `🎯 الخلطة: ${state.blend.name}`, `🧪 النوتات: ${state.blend.notes.join(' + ')}`,
-    `📦 الباقة: ${pkg.name} (${pkg.size}ml)`, `💰 السعر: ${pkg.price}`, `🎁 النوع: ${gender}`,
-    '━━━━━━━━━━━━━━━',
-    `🔖 كود الطلب: *${code}*`,
-    '━━━━━━━━━━━━━━━',
-    '💵 الدفع: عند الاستلام'
-  ].join('\n');
-  window.location.href = `https://wa.me/${CONFIG.phone}?text=${encodeURIComponent(msg)}`;
-  setTimeout(()=>{ showScreen('s-thanks'); }, 1000);
-}
-
-// ═══════════ ربط الأزرار (عشان نضمن إنها تشتغل 100%) ═══════════
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('btn-start').addEventListener('click', startQuiz);
-  document.getElementById('btn-to-packages').addEventListener('click', goToPackages);
-  document.getElementById('btn-next-pkg').addEventListener('click', goToForm);
-  document.getElementById('btn-submit').addEventListener('click', submitOrder);
-});
-</script>
-</body>
-</html>
+  leat
