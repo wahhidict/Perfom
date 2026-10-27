@@ -37,7 +37,7 @@ body{
 .hero p{color:var(--dim);font-size:16px;margin-bottom:30px;max-width:400px;margin-inline:auto;line-height:1.8}
 
 .hero-image-wrapper {margin: 0 auto 30px;width: 160px;height: 160px;position: relative;border-radius: 50%;display: flex;align-items: center;justify-content: center;}
-.hero-image {width: 100%;height: 100%;object-fit: cover;border-radius: 50%;border: 1px solid var(--gold);padding: 5px;animation: float 5s ease-in-out infinite;}
+.hero-image {width: 100%;height: 100%;object-fit: cover;border-radius: 50%;border: 1px solid var(--gold);padding: 5px;animation: float 5s ease-in-out infinite; background-color:#000;}
 .hero-image-wrapper::before {content: '';position: absolute;width: 120%;height: 120%;border-radius: 50%;background: radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%);z-index: -1;animation: pulse-glow 3s infinite alternate;}
 
 /* Buttons */
@@ -114,7 +114,6 @@ body{
 
 <div id="app">
 
-  <!-- 1. شاشة الترحيب المحايدة -->
   <section class="screen active" id="s-landing">
     <div class="hero">
       <span class="hero-badge">تجربة عطرية مخصصة</span>
@@ -127,13 +126,13 @@ body{
       <p>9 أسئلة قصيرة تحلل الشخصية، وبالآخر نصنع خلطة عطرية خاصة جداً، ما بتتشابه مع أي عطر تاني.</p>
       
       <div class="btn-group">
+        <!-- رجعنا نستخدم onclick المباشر لضمان الشغل 100% -->
         <button class="btn btn-primary" onclick="startFlow('self')">أريد عطراً لنفسي</button>
         <button class="btn btn-ghost" onclick="startFlow('gift')">أبحث عن هدية مميزة</button>
       </div>
     </div>
   </section>
 
-  <!-- 2. شاشة الأسئلة -->
   <section class="screen" id="s-quiz">
     <div class="progress-wrap">
       <div class="progress-info">
@@ -146,7 +145,6 @@ body{
     <div class="choices" id="q-choices"></div>
   </section>
 
-  <!-- 3. شاشة النتيجة -->
   <section class="screen" id="s-result">
     <div class="result-head">
       <div class="result-label" id="r-label">خلطتك الخاصة</div>
@@ -157,15 +155,13 @@ body{
     <button class="btn btn-primary" onclick="goToPackages()">اختر إصدارك الآن</button>
   </section>
 
-  <!-- 4. شاشة الباقات -->
   <section class="screen" id="s-packages">
     <h2 class="q-text" style="text-align:center;margin-bottom:5px">اختر حجم الإصدار</h2>
     <p style="text-align:center;color:var(--dim);font-size:14px;margin-bottom:30px">جميع الإصدارات تأتي بعلبة فاخرة وبطاقة تحمل اسمك</p>
     <div class="pkgs" id="pkg-list"></div>
-    <button class="btn btn-primary" id="btn-next-pkg" style="opacity:0.3" disabled>التالي</button>
+    <button class="btn btn-primary" id="btn-next-pkg" onclick="goToForm()" style="opacity:0.3" disabled>التالي</button>
   </section>
 
-  <!-- 5. شاشة البيانات -->
   <section class="screen" id="s-form">
     <h2 class="q-text" style="text-align:center;margin-bottom:25px">معلومات التوصيل</h2>
     <div class="form">
@@ -176,7 +172,6 @@ body{
     <button class="btn btn-primary" onclick="submitOrder()">تأكيد الطلب عبر واتساب</button>
   </section>
 
-  <!-- 6. شاشة الشكر -->
   <section class="screen" id="s-thanks">
     <div class="thanks">
       <div class="thanks-icon">✓</div>
@@ -197,7 +192,7 @@ const PACKAGES = {
   special:  { name: 'الإصدار الخاص', size: 100, price: '450,000', oldPrice: '600,000' }
 };
 
-// ═══════════ البيانات (الأسئلة والخلطات) ═══════════
+// ═══════════ البيانات ═══════════
 const Q = (id, t_self, choices, weights, t_gift) => ({id, text_self: t_self, choices, weights, text_gift: t_gift});
 
 const QB = {
@@ -240,4 +235,175 @@ const BLENDS = {
   floral: {name:'خلطة الرقة',key:'FLORAL',notes:['ورد طائفي','ياسمين','فريزيا'],message:'رقتك أقوى مما بيظن الناس. كتير ناس بتشوف الهدوء ضعف، بس أنت بتعرف إنه الهدوء قوة بتتعب أقل. وردك هو هالرقة — دافية، فيها وفاء ما بيتغير. أنت الشخص اللي بيضل جنب اللي بيحبهم، بهدوء، بلا ضجّة، بلا شروط.'},
   spicy: {name:'خلطة الجرأة',key:'SPICY',notes:['زعفران','فلفل','قرفة'],message:'فيك شي ما بينلقى بسهولة. إجاباتك حكيت عن جرأة هادية، عن شخص بيعرف قيمته بلا ما يحتاج يثبتها لحدا. زعفرانك هو هالندرة — غالي، مميز، وما بيتشبه بحدا. أنت من الناس اللي بيمرقوا بالحياة وبيتركوا أثر.'},
   sweet: {name:'خلطة الحلاوة',key:'SWEET',notes:['فانيلا','عسل','تونكا'],message:'أنت بتعطي بلا ما تحسب. حبك، وقتك، اهتمامك — كله بيجي من قلب مفتوح. حلاوتك هي هالعطاء — طبيعية، دافية، بلا تصنّع. إجاباتك حكيت عن شخص بيهمه يسعد اللي حواليه، وأحياناً بينسى حالو. بس اسمح لي قلك: أنت كمان بتستاهل حدا يعطيك.'},
-  leat
+  leather: {name:'خلطة الدرع',key:'LEATHER',notes:['جلد','عود','باتشولي'],message:'أنت درع للي بتحبهم. ما بتحكي كثير عن مشاعرك، بس أفعالك بتحكي. جلدك هو هالحماية — قوي، دافي، فيه نبض حياة. إجاباتك حكيت عن شخص بيحمي اللي حواليه بلا ما يطلب مقابل. في ناس بتحب بالكلام، وأنت من الناس اللي بتحب بالأفعال.'},
+  chypre: {name:'خلطة الحكمة',key:'CHYPRE',notes:['برغموت','باتشولي','طحلب بلوط'],message:'فيك شي قديم… مش بالعمر، بالروح. كأنك جاي من زمن كان فيه عمق أكثر، وسكوت أدفى. حكمتك هي هالغموض اللي حواليك — أرضي، عميق، فيه سر ما بتحكي عنه. الناس بتقرب منك وهي حاسة إنها لسا ما اكتشفتك كلياً.'}
+};
+
+// ═══════════ المنطق ═══════════
+let state = { mode: 'self', answers:{}, questions:[], current:0, blend:null, pkgKey:null };
+const $ = id => document.getElementById(id);
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  $(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function startFlow(mode){
+  state = { mode: mode, answers:{}, questions:[], current:0, blend:null, pkgKey:null };
+  $('q-mode-label').textContent = mode === 'self' ? 'لأجلك شخصياً' : 'هدية لشخص تحبه';
+  state.questions = [ QB.fi[0], QB.mem[0], QB.en[0], QB.hid[0], QB.sty[0], QB.occ[0] ];
+  showScreen('s-quiz');
+  renderQuestion();
+}
+
+function ensureQuestionAt(idx){
+  while(state.questions.length <= idx){
+    const next = state.questions.length;
+    if(next === 6){
+      const fi1 = state.answers['fi_1']||'';
+      state.questions.push((fi1.includes('حضوري')||fi1.includes('ريحتي')) ? QB.fi[3] : QB.fi[1]);
+    } else if(next === 7){
+      const mem1 = state.answers['mem_1']||'';
+      state.questions.push((mem1.includes('بخور')||mem1.includes('ورد')) ? QB.mem[1] : QB.mem[2]);
+    } else if(next === 8){
+      const en1 = state.answers['en_1']||'';
+      state.questions.push((en1.includes('نار')||en1.includes('تراب')) ? QB.en[2] : QB.en[1]);
+    } else {
+      state.questions.push(QB.sty[1]);
+    }
+  }
+}
+
+function renderQuestion(){
+  ensureQuestionAt(state.current);
+  const q = state.questions[state.current];
+  $('q-num').textContent = state.current + 1;
+  $('q-fill').style.width = ((state.current/9)*100) + '%';
+  
+  const qText = (state.mode === 'gift' && q.text_gift) ? q.text_gift : q.text_self;
+  $('q-text').textContent = qText;
+
+  const choices = $('q-choices');
+  choices.innerHTML = '';
+  q.choices.forEach(c=>{
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.textContent = c;
+    btn.onclick = () => {
+      state.answers[q.id] = c;
+      document.querySelectorAll('.choice').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      setTimeout(()=>{
+        state.current++;
+        if(state.current < 9){ renderQuestion(); } else { analyzeResult(); }
+      }, 250);
+    };
+    choices.appendChild(btn);
+  });
+}
+
+function analyzeResult(){
+  $('analyzing-overlay').classList.remove('hidden');
+  const texts = ['جاري تحليل الإجابات...', 'مطابقة النوتات العطرية...', 'بناء خلطة فريدة...'];
+  let i = 0;
+  const interval = setInterval(()=>{
+    i++;
+    if(i < texts.length) $('analyzing-text').textContent = texts[i];
+  }, 900);
+
+  setTimeout(()=>{
+    clearInterval(interval);
+    $('analyzing-overlay').classList.add('hidden');
+    finishQuiz();
+  }, 2800);
+}
+
+function finishQuiz(){
+  const scores = {};
+  for(const qid in state.answers){
+    const q = Object.values(QB).flat().find(x=>x.id===qid);
+    if(!q) continue;
+    const w = q.weights[state.answers[qid]];
+    if(!w) continue;
+    for(const fam in w) scores[fam] = (scores[fam]||0) + w[fam];
+  }
+  const TIE_ORDER = ['oud','amber','wood','musk','fresh','floral','spicy','sweet','leather','chypre'];
+  const ordered = TIE_ORDER.filter(f=>scores[f]).sort((a,b)=>(scores[b]||0)-(scores[a]||0));
+  state.blend = BLENDS[ordered[0]];
+
+  $('r-label').textContent = state.mode === 'self' ? 'هذا هو توقيعك' : 'هذه هي الهدية المثالية له';
+  $('r-name').textContent = state.blend.name;
+  $('r-notes').innerHTML = state.blend.notes.map(n=>`<span class="chip">${n}</span>`).join('');
+  
+  let msg = state.blend.message;
+  if(state.mode === 'gift'){
+    msg = `اخترت هدية ما بتتشابه مع أي هدية تانية. هالخلطة بتحكي عن الشخص اللي بتحبه: <br><br>` + msg;
+  }
+  $('r-message').innerHTML = msg;
+  showScreen('s-result');
+}
+
+function goToPackages(){
+  const list = $('pkg-list');
+  list.innerHTML = '';
+  ['special','signature','basic'].forEach(k=>{
+    const p = PACKAGES[k];
+    const div = document.createElement('div');
+    div.className = 'pkg' + (p.recommended ? ' recommended' : '');
+    div.innerHTML = `
+      <div class="pkg-header">
+        <div class="pkg-name">${p.name}</div>
+        <div class="pkg-size">${p.size} ml</div>
+      </div>
+      <div class="pkg-price-row">
+        <div class="pkg-price">${p.price} ل.س</div>
+        <div class="pkg-price-old">${p.oldPrice} ل.س</div>
+      </div>
+      <div class="scarcity">🔥 الكمية محدودة جداً لهذا الإصدار</div>
+    `;
+    div.onclick = () => {
+      document.querySelectorAll('.pkg').forEach(x=>x.classList.remove('selected'));
+      div.classList.add('selected');
+      state.pkgKey = k;
+      const btn = $('btn-next-pkg');
+      btn.disabled = false;
+      btn.style.opacity = '1';
+    };
+    list.appendChild(div);
+  });
+  showScreen('s-packages');
+}
+
+function goToForm() {
+  if(state.pkgKey) showScreen('s-form');
+}
+
+function submitOrder(){
+  const name = $('f-name').value.trim();
+  const phone = $('f-phone').value.trim();
+  const address = $('f-address').value.trim();
+  if(!name || !phone || !address){ alert('الرجاء تعبئة كل الحقول'); return; }
+  
+  const pkg = PACKAGES[state.pkgKey];
+  const code = `${state.blend.key}-${pkg.size}-${Math.random().toString(36).slice(2,6).toUpperCase()}`;
+  const type = state.mode === 'self' ? 'لنفسه' : 'هدية';
+  
+  const msg = [
+    '🛒 *طلب جديد*', '━━━━━━━━━━━━━━━',
+    `👤 الاسم: ${name}`, `📱 الموبايل: ${phone}`, `📍 العنوان: ${address}`,
+    `🎁 نوع الطلب: ${type}`,
+    '━━━━━━━━━━━━━━━',
+    `🎯 الخلطة: ${state.blend.name}`, `🧪 النوتات: ${state.blend.notes.join(' + ')}`,
+    `📦 الباقة: ${pkg.name} (${pkg.size}ml)`, `💰 السعر: ${pkg.price} ل.س`,
+    '━━━━━━━━━━━━━━━',
+    `🔖 كود التجهيز: *${code}*`,
+    '💵 الدفع: عند الاستلام'
+  ].join('\n');
+  
+  window.location.href = `https://wa.me/${CONFIG.phone}?text=${encodeURIComponent(msg)}`;
+  setTimeout(()=>{ showScreen('s-thanks'); }, 1000);
+}
+</script>
+</body>
+</html>
