@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عطرك بينبنى على شخصيتك</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0e1a; --bg-2:#131824; --bg-3:#1c2230;
+  --gold:#c9a86a; --gold-l:#e0c48a; --gold-d:#9d8350;
+  --text:#f5f0e8; --dim:#8a8578;
+  --border:rgba(201,168,106,.22);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:'Tajawal',system-ui,sans-serif;
+  background:radial-gradient(ellipse at top,#131824 0%,#0a0e1a 70%);
+  color:var(--text); min-height:100vh; line-height:1.7;
+  overflow-x:hidden; -webkit-font-smoothing:antialiased;
+}
+#app{max-width:640px;margin:0 auto;padding:24px;min-height:100vh;display:flex;flex-direction:column}
+.screen{display:none;flex:1;animation:fadeIn .5s ease}
+.screen.active{display:flex;flex-direction:column;justify-content:center}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.hero{text-align:center;padding:20px 0}
+.hero-badge{display:inline-block;padding:6px 16px;border:1px solid var(--border);border-radius:999px;font-size:13px;color:var(--gold);margin-bottom:24px;letter-spacing:1px;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,7vw,52px);font-weight:700;line-height:1.2;margin-bottom:18px;background:linear-gradient(135deg,#f5f0e8 0%,var(--gold-l) 50%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero p{color:var(--dim);font-size:17px;margin-bottom:32px;max-width:460px;margin-inline:auto}
+.hero-features{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:32px}
+.hero-features span{font-size:13px;color:var(--dim);padding:6px 12px;border:1px solid rgba(201,168,106,.15);border-radius:8px}
+
+.btn{display:block;width:100%;padding:18px 28px;border:none;border-radius:14px;font-family:inherit;font-size:17px;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--gold-l) 0%,var(--gold) 50%,var(--gold-d) 100%);color:#0a0e1a;transition:all .3s;box-shadow:0 8px 24px rgba(201,168,106,.25);position:relative;overflow:hidden;}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(201,168,106,.4)}
+.btn::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);transition:left .6s;}
+.btn:hover::after{left:100%}
+
+.progress-wrap{margin-bottom:32px}
+.progress-info{display:flex;justify-content:space-between;font-size:13px;color:var(--dim);margin-bottom:10px}
+.progress-info strong{color:var(--gold);font-weight:700}
+.progress-bar{height:4px;background:rgba(201,168,106,.15);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-l));transition:width .5s cubic-bezier(.4,0,.2,1);border-radius:4px}
+
+.q-label{font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--gold);letter-spacing:2px;margin-bottom:12px;text-transform:uppercase}
+.q-text{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;line-height:1.4;margin-bottom:28px;color:var(--text)}
+.choices{display:flex;flex-direction:column;gap:12px}
+.choice{padding:18px 22px;background:var(--bg-2);border:1.5px solid var(--border);border-radius:14px;cursor:pointer;transition:all .25s;font-size:16px;color:var(--text);text-align:right;font-family:inherit;}
+.choice:hover{border-color:var(--gold);background:var(--bg-3);transform:translateX(-4px)}
+.choice.selected{border-color:var(--gold);background:rgba(201,168,106,.12);box-shadow:0 0 0 1px var(--gold)}
+
+.result-head{text-align:center;margin-bottom:24px}
+.result-label{font-size:13px;color:var(--gold);letter-spacing:3px;margin-bottom:8px}
+.result-name{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:700;background:linear-gradient(135deg,var(--gold-l),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;}
+.notes-chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:28px}
+.chip{padding:8px 16px;background:rgba(201,168,106,.1);border:1px solid var(--border);border-radius:999px;font-size:14px;color:var(--gold-l)}
+.message-card{background:linear-gradient(135deg,var(--bg-2),var(--bg-3));border:1px solid var(--border);border-radius:18px;padding:28px;margin-bottom:28px;position:relative;overflow:hidden;}
+.message-card::before{content:'"';position:absolute;top:-20px;right:14px;font-size:120px;font-family:'Cormorant Garamond',serif;color:rgba(201,168,106,.08);}
+.message-card p{font-size:16px;line-height:1.9;color:var(--text);position:relative;z-index:1}
+
+.pkgs{display:flex;flex-direction:column;gap:14px;margin-bottom:24px}
+.pkg{padding:22px;background:var(--bg-2);border:1.5px solid var(--border);border-radius:16px;cursor:pointer;transition:all .25s;position:relative;}
+.pkg:hover{border-color:var(--gold);transform:translateY(-2px)}
+.pkg.selected{border-color:var(--gold);background:rgba(201,168,106,.08);box-shadow:0 0 0 1px var(--gold)}
+.pkg.recommended::before{content:'الأكثر طلباً';position:absolute;top:-10px;left:20px;background:var(--gold);color:#0a0e1a;font-size:11px;font-weight:700;padding:3px 12px;border-radius:999px;}
+.pkg-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--text);margin-bottom:4px}
+.pkg-size{font-size:13px;color:var(--dim);margin-bottom:10px}
+.pkg-price{font-size:20px;font-weight:700;color:var(--gold)}
+
+.form{display:flex;flex-direction:column;gap:14px;margin-bottom:24px}
+.field label{display:block;font-size:13px;color:var(--dim);margin-bottom:6px}
+.field input,.field textarea,.field select{width:100%;padding:14px 18px;background:var(--bg-2);border:1.5px solid var(--border);border-radius:12px;color:var(--text);font-family:inherit;font-size:15px;transition:border-color .2s;resize:none;}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--gold)}
+.field input::placeholder,.field textarea::placeholder{color:#555;}
+
+.thanks{text-align:center;padding:40px 20px}
+.thanks-icon{width:80px;height:80px;margin:0 auto 24px;border-radius:50%;background:rgba(201,168,106,.12);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:40px;color:var(--gold);}
+.thanks h2{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--gold);margin-bottom:12px}
+.thanks p{color:var(--dim);font-size:16px;max-width:400px;margin:0 auto}
+.step-badge{display:inline-block;padding:4px 12px;background:rgba(201,168,106,.1);border:1px solid var(--border);border-radius:999px;font-size:12px;color:var(--gold);margin-bottom:16px;align-self:flex-start;}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <section class="screen active" id="s-landing">
+    <div class="hero">
+      <span class="hero-badge">تجربة عطرية فريدة</span>
+      <h1>عطرك مش جاهز…<br>عطرك بينبنى على شخصيتك</h1>
+      <p>9 أسئلة سريعة. كل إجابة تضيف مكوّن لعطرك. بالآخر بتشوف خلطتك ومكوناتها.</p>
+      <div class="hero-features">
+        <span>✦ خلطة تحمل اسمك</span>
+        <span>✦ تجهيز 2–4 أيام</span>
+        <span>✦ دفع عند الاستلام</span>
+      </div>
+      <button class="btn" onclick="startQuiz()">ابدأ الاختبار</button>
+    </div>
+  </section>
+
+  <section class="screen" id="s-quiz">
+    <div class="progress-wrap">
+      <div class="progress-info">
+        <span>السؤال <strong id="q-num">1</strong> من <strong>9</strong></span>
+        <span id="q-pct">0%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="q-fill"></div></div>
+    </div>
+    <div class="q-label" id="q-label">اختر ما يشبهك</div>
+    <h2 class="q-text" id="q-text"></h2>
+    <div class="choices" id="q-choices"></div>
+  </section>
+
+  <section class="screen" id="s-result">
+    <div class="result-head">
+      <div class="result-label">خلطتك الخاصة</div>
+      <div class="result-name" id="r-name"></div>
+      <div class="notes-chips" id="r-notes"></div>
+    </div>
+    <div class="message-card"><p id="r-message"></p></div>
+    <button class="btn" onclick="goToPackages()">اختر باقتك</button>
+  </section>
+
+  <section class="screen" id="s-packages">
+    <span class="step-badge">الخطوة 2 من 3</span>
+    <h2 class="q-text">اختر حجم عطرك</h2>
+    <div class="pkgs" id="pkg-list"></div>
+    <button class="btn" id="btn-next-pkg" onclick="goToForm()" disabled style="opacity:0.5">التالي</button>
+  </section>
+
+  <section class="screen" id="s-form">
+    <span class="step-badge">الخطوة 3 من 3</span>
+    <h2 class="q-text">بياناتك للتوصيل</h2>
+    <div class="form">
+      <div class="field"><label>الاسم الكامل</label><input id="f-name" placeholder="مثلاً: سامر أحمد"></div>
+      <div class="field"><label>رقم الموبايل (واتساب)</label><input id="f-phone" type="tel" placeholder="09xxxxxxxx"></div>
+      <div class="field"><label>العنوان الكامل</label><textarea id="f-address" rows="2" placeholder="المدينة، الحي، الشارع…"></textarea></div>
+      <div class="field"><label>النوع</label>
+        <select id="f-gender">
+          <option value="إله شخصياً">إله شخصياً</option>
+          <option value="هدية">هدية</option>
+        </select>
+      </div>
+    </div>
+    <button class="btn" onclick="submitOrder()">تأكيد الطلب عبر واتساب</button>
+  </section>
+
+  <section class="screen" id="s-thanks">
+    <div class="thanks">
+      <div class="thanks-icon">✓</div>
+      <h2>تم استلام طلبك</h2>
+      <p>رح نتواصل معك على واتساب خلال ساعة لتأكيد التفاصيل وموعد التوصيل.</p>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ═══════════ البيانات ═══════════
+const CONFIG = {
+  phone: '963945333924',
+  packages: {
+    basic:    { name: 'الباقة الأساسية', size: 30,  price: '150,000 ل.س' },
+    signature:{ name: 'باقة التوقيع',    size: 50,  price: '250,000 ل.س' },
+    special:  { name: 'الإصدار الخاص',   size: 100, price: '450,000 ل.س' }
+  }
+};
+
+const TIE_ORDER = ['oud','amber','wood','musk','fresh','floral','spicy','sweet','leather','chypre'];
+const Q = (id, text, choices, weights) => ({id, text, choices, weights});
+
+const QUESTION_BANK = {
+  first_impression: [
+    Q('fi_1','أول ما تدخل مكان، شو بتحب يلاحظوه فيك؟',['حضوري القوي','أناقتي الهادية','هدوئي العميق','ريحتي المميزة'],{'حضوري القوي':{oud:3,amber:2,spicy:1},'أناقتي الهادية':{wood:3,musk:2,fresh:1},'هدوئي العميق':{musk:3,wood:2,floral:1},'ريحتي المميزة':{fresh:3,floral:2,amber:1}}),
+    Q('fi_2','لما تكون بمجلس، وين بتقعد؟',['بالصدر، الكل بيشوفني','بجنب، براقب الجو','بالنص، بربط الناس','قريب من الباب'],{'بالصدر، الكل بيشوفني':{oud:3,spicy:2,amber:1},'بجنب، براقب الجو':{wood:3,leather:2,musk:1},'بالنص، بربط الناس':{amber:3,floral:2,sweet:1},'قريب من الباب':{fresh:3,musk:2,wood:1}}),
+    Q('fi_3','شو بيلفتك أول مرة بشخص؟',['وقفته وثقته','أناقته وتفاصيله','صوته وهدوءه','ريحته'],{'وقفته وثقته':{oud:3,leather:2,spicy:1},'أناقته وتفاصيله':{wood:3,chypre:2,musk:1},'صوته وهدوءه':{musk:3,wood:2,floral:1},'ريحته':{fresh:3,amber:2,floral:1}}),
+    Q('fi_4','كيف بتدخل غرفة فيها ناس ما بتعرفهن؟',['بسلم على الكل','بسكت لحدا يحكي','بختار شخص واحد','بمرق بهدوء'],{'بسلم على الكل':{amber:3,sweet:2,floral:1},'بسكت لحدا يحكي':{wood:3,musk:2,leather:1},'بختار شخص واحد':{musk:3,wood:2,fresh:1},'بمرق بهدوء':{oud:3,wood:2,leather:1}}),
+    Q('fi_5','لو وصفت حضورك بكلمة؟',['هيبة','أناقة','دفء','غموض'],{'هيبة':{oud:3,leather:2,spicy:1},'أناقة':{wood:3,chypre:2,musk:1},'دفء':{amber:3,sweet:2,musk:1},'غموض':{oud:2,leather:3,wood:2}}),
+    Q('fi_6','شو بتحب الناس تتذكره فيك؟',['كلمتك','ابتسامتك','إحساسك','ريحتك'],{'كلمتك':{wood:3,leather:2,spicy:1},'ابتسامتك':{floral:3,sweet:2,amber:1},'إحساسك':{amber:3,musk:2,wood:1},'ريحتك':{fresh:3,oud:2,floral:1}})
+  ],
+  memory: [
+    Q('mem_1','أي رائحة بتعيدك لأحلى ذكرى؟',['بخور وبيت الجدة','بحر وهوا','ورد وحديقة','مطر وتراب'],{'بخور وبيت الجدة':{amber:3,oud:2,spicy:1},'بحر وهوا':{fresh:3,musk:2,wood:1},'ورد وحديقة':{floral:3,sweet:2,musk:1},'مطر وتراب':{wood:3,chypre:2,musk:1}}),
+    Q('mem_2','وين بتحس حالك "أنت"؟',['بيت قديم وحجارة','شاطئ ومساحة','غرفة هادية','سوق وزحمة'],{'بيت قديم وحجارة':{oud:3,amber:2,wood:1},'شاطئ ومساحة':{fresh:3,musk:2,wood:1},'غرفة هادية':{wood:3,musk:2,chypre:1},'سوق وزحمة':{spicy:3,amber:2,leather:1}}),
+    Q('mem_3','أي موسم بيشبهك؟',['شتا ودفء','ربيع وانتعاش','صيف وحرية','خريف وهدوء'],{'شتا ودفء':{amber:3,oud:2,sweet:1},'ربيع وانتعاش':{floral:3,fresh:2,musk:1},'صيف وحرية':{fresh:3,musk:2,floral:1},'خريف وهدوء':{wood:3,chypre:2,leather:1}}),
+    Q('mem_4','أي وقت بتحب تنعيش فيه؟',['الفجر','الضحى','المغرب','الليل'],{'الفجر':{fresh:3,floral:2,musk:1},'الضحى':{fresh:2,floral:2,sweet:1,amber:1},'المغرب':{amber:3,wood:2,floral:1},'الليل':{oud:3,leather:2,amber:1}}),
+    Q('mem_5','شو ما بتنساه من طفولتك؟',['ريحة مطبخ أمي','صوت المطر','لعب بالتراب','بحر بالصيف'],{'ريحة مطبخ أمي':{amber:3,sweet:2,spicy:1},'صوت المطر':{wood:3,chypre:2,musk:1},'لعب بالتراب':{wood:2,fresh:2,musk:2},'بحر بالصيف':{fresh:3,musk:2,floral:1}}),
+    Q('mem_6','أي ذكرى بتحب ترجع إلها؟',['حضن دافي','ضحكة مع صحاب','سكون لحالك','لحظة نجاح'],{'حضن دافي':{amber:3,musk:2,sweet:1},'ضحكة مع صحاب':{floral:3,sweet:2,fresh:1},'سكون لحالك':{wood:3,musk:2,chypre:1},'لحظة نجاح':{oud:3,leather:2,spicy:1}})
+  ],
+  energy: [
+    Q('en_1','طاقتك أقرب لوين؟',['نار','هوا','ماء','تراب'],{'نار':{amber:3,spicy:2,oud:1},'هوا':{fresh:3,musk:2,floral:1},'ماء':{musk:3,wood:2,fresh:1},'تراب':{wood:3,oud:2,leather:1}}),
+    Q('en_2','كيف بتتعامل مع الضغط؟',['بواجه بصراحة','بسكت وبفكر','بحكي مع حدا قريب','بمشي لحالي'],{'بواجه بصراحة':{leather:3,spicy:2,oud:1},'بسكت وبفكر':{wood:3,musk:2,chypre:1},'بحكي مع حدا قريب':{amber:3,musk:2,sweet:1},'بمشي لحالي':{fresh:3,wood:2,musk:1}}),
+    Q('en_3','شو بيعبيك طاقة؟',['نجاح وطموح','حب وناس','سكون وطبيعة','حرية وسفر'],{'نجاح وطموح':{oud:3,leather:2,spicy:1},'حب وناس':{amber:3,floral:2,sweet:1},'سكون وطبيعة':{wood:3,musk:2,chypre:1},'حرية وسفر':{fresh:3,musk:2,wood:1}}),
+    Q('en_4','لو تكون حيوان؟',['أسد','حصان','قط','طير'],{'أسد':{oud:3,leather:2,spicy:1},'حصان':{fresh:3,wood:2,musk:1},'قط':{musk:3,oud:2,wood:1},'طير':{fresh:2,floral:2,musk:2}}),
+    Q('en_5','أي لون بيشبهك؟',['أسود عميق','أبيض نقي','بني دافي','أحمر غامق'],{'أسود عميق':{oud:3,leather:2,wood:1},'أبيض نقي':{musk:3,fresh:2,floral:1},'بني دافي':{amber:3,wood:2,sweet:1},'أحمر غامق':{spicy:3,floral:2,amber:1}}),
+    Q('en_6','شو بيخليك تحس حالك حي؟',['إنجاز صعب','لحظة حب','سكون بعد تعب','مغامرة'],{'إنجاز صعب':{oud:3,spicy:2,leather:1},'لحظة حب':{amber:3,floral:2,musk:1},'سكون بعد تعب':{wood:3,musk:2,chypre:1},'مغامرة':{fresh:3,spicy:2,musk:1}})
+  ],
+  hidden: [
+    Q('hid_1','شو ما بيبين عليك أول لقاء؟',['جرأة','حنين','طموح','رومانسية'],{'جرأة':{leather:3,spicy:2,oud:1},'حنين':{amber:3,sweet:2,musk:1},'طموح':{oud:3,wood:2,leather:1},'رومانسية':{floral:3,sweet:2,musk:1}}),
+    Q('hid_2','شو بتخبيه عن الناس؟',['ضعفي','حبي','خوفي','طموحي'],{'ضعفي':{musk:3,wood:2,amber:1},'حبي':{floral:3,amber:2,sweet:1},'خوفي':{wood:3,oud:2,musk:1},'طموحي':{oud:3,leather:2,spicy:1}}),
+    Q('hid_3','لو حدا شافك منيح، شو بيكتشف؟',['قلب كبير','عقل حاد','روح حرة','إرادة قوية'],{'قلب كبير':{amber:3,floral:2,musk:1},'عقل حاد':{wood:3,chypre:2,leather:1},'روح حرة':{fresh:3,musk:2,wood:1},'إرادة قوية':{oud:3,leather:2,spicy:1}}),
+    Q('hid_4','شو أكتر شي بتخاف منه؟',['الخيانة','الفشل','الوحدة','الروتين'],{'الخيانة':{leather:3,oud:2,wood:1},'الفشل':{oud:2,wood:3,spicy:1},'الوحدة':{amber:3,musk:2,floral:1},'الروتين':{fresh:3,spicy:2,floral:1}}),
+    Q('hid_5','شو ما بتسمح لحدا يلمسه فيك؟',['كرامتي','أهلي','مبادئي','حريتي'],{'كرامتي':{oud:3,leather:2,wood:1},'أهلي':{amber:3,musk:2,leather:1},'مبادئي':{wood:3,leather:2,chypre:1},'حريتي':{fresh:3,musk:2,wood:1}}),
+    Q('hid_6','لو تعرف حالك بكلمة؟',['قوي','حساس','غامض','طيب'],{'قوي':{oud:3,leather:2,wood:1},'حساس':{floral:3,musk:2,amber:1},'غامض':{oud:2,leather:2,musk:2},'طيب':{amber:3,musk:2,sweet:1}})
+  ],
+  style: [
+    Q('sty_1','كيف بتحب تُكتشف؟',['فوراً','على مراحل','غامض','واضح ومريح'],{'فوراً':{fresh:3,spicy:2,oud:1},'على مراحل':{wood:3,amber:2,musk:1},'غامض':{oud:3,leather:2,wood:1},'واضح ومريح':{musk:3,fresh:2,floral:1}}),
+    Q('sty_2','أسلوبك باللبس؟',['كلاسيكي أنيق','رياضي مريح','غريب ومميز','بسيط ونظيف'],{'كلاسيكي أنيق':{wood:3,chypre:2,oud:1},'رياضي مريح':{fresh:3,musk:2,wood:1},'غريب ومميز':{spicy:3,leather:2,floral:1},'بسيط ونظيف':{musk:3,fresh:2,wood:1}}),
+    Q('sty_3','أكسسوار واحد بس؟',['ساعة فخمة','خاتم بسيط','سلسلة','عطر'],{'ساعة فخمة':{oud:3,wood:2,leather:1},'خاتم بسيط':{musk:3,wood:2,chypre:1},'سلسلة':{spicy:2,floral:2,fresh:2},'عطر':{oud:2,amber:2,fresh:2,floral:2}}),
+    Q('sty_4','كيف بتختار عطرك؟',['بسمع اسم الماركة','بشم وبختار','حدا بختارلي','بجرب شي جديد'],{'بسمع اسم الماركة':{oud:3,wood:2,leather:1},'بشم وبختار':{musk:3,amber:2,floral:1},'حدا بختارلي':{amber:3,sweet:2,floral:1},'بجرب شي جديد':{fresh:3,spicy:2,floral:1}}),
+    Q('sty_5','شو بيهمك بالعطر؟',['قوته وثباته','تميزه','راحته','قصته'],{'قوته وثباته':{oud:3,amber:2,spicy:1},'تميزه':{spicy:3,leather:2,floral:1},'راحته':{musk:3,fresh:2,wood:1},'قصته':{floral:3,amber:2,wood:1}}),
+    Q('sty_6','لو تسمي عطرك؟',['أثر','غموض','دفء','حياة'],{'أثر':{oud:3,leather:2,wood:1},'غموض':{oud:2,musk:2,leather:2},'دفء':{amber:3,sweet:2,musk:1},'حياة':{fresh:3,floral:2,sweet:1}})
+  ],
+  occasion: [
+    Q('occ_1','وين بتشوف عطرك أكتر؟',['نهار وشغل','ليل وسهر','مناسبات','كل يوم'],{'نهار وشغل':{fresh:3,musk:2,wood:1},'ليل وسهر':{oud:3,amber:2,spicy:1},'مناسبات':{floral:3,oud:2,sweet:1},'كل يوم':{musk:3,fresh:2,wood:1}}),
+    Q('occ_2','أي مناسبة بتحبها؟',['عرس واحتفال','سهرة هادية','قهوة مع صحاب','لحظة لحالك'],{'عرس واحتفال':{floral:3,sweet:2,amber:1},'سهرة هادية':{oud:3,leather:2,amber:1},'قهوة مع صحاب':{amber:3,sweet:2,musk:1},'لحظة لحالك':{wood:3,musk:2,chypre:1}}),
+    Q('occ_3','أي جو بتحس فيه حالك أحلى؟',['مطر وبرد','شمس ودفء','هوا ونسيم','سكون وليل'],{'مطر وبرد':{wood:3,amber:2,chypre:1},'شمس ودفء':{floral:3,sweet:2,fresh:1},'هوا ونسيم':{fresh:3,musk:2,floral:1},'سكون وليل':{oud:3,musk:2,wood:1}}),
+    Q('occ_4','شو بتحب تشرب؟',['قهوة سادة','شاي بالنعنع','عصير فواكه','ماء بارد'],{'قهوة سادة':{oud:3,sweet:2,wood:1},'شاي بالنعنع':{fresh:3,musk:2,spicy:1},'عصير فواكه':{floral:3,sweet:2,fresh:1},'ماء بارد':{fresh:3,musk:2,wood:1}}),
+    Q('occ_5','لو تعزم حدا؟',['قهوة عربية وتمر','شاي وحلويات','عصير وفواكه','شي مميز'],{'قهوة عربية وتمر':{amber:3,oud:2,spicy:1},'شاي وحلويات':{sweet:3,floral:2,musk:1},'عصير وفواكه':{fresh:3,floral:2,musk:1},'شي مميز':{spicy:3,leather:2,floral:1}}),
+    Q('occ_6','وقت الفراغ؟',['قراءة وهدوء','رياضة وحركة','طلعات وناس','أفلام وبيت'],{'قراءة وهدوء':{wood:3,musk:2,chypre:1},'رياضة وحركة':{fresh:3,spicy:2,wood:1},'طلعات وناس':{amber:3,floral:2,sweet:1},'أفلام وبيت':{sweet:3,musk:2,amber:1}})
+  ]
+};
+
+const BLENDS = {
+  oud: {name:'خلطة الأثر',key:'OUD',notes:['عود','عنبر','مسك أبيض'],message:'في ناس بيدخلوا المكان بيضجّوا، وناس بيدخلوا بيسكتوا المكان. أنت من النوع التاني. عودك ما هو صراخ — هو ذاك الهدوء اللي بيخلي الناس تلتفت وتسأل: مين هاد؟ لأن فيك أصالة ما بتنشرى، وحضور ما بينطلب. اللي بيعرفك بيعرف إنك أصل، والباقي بيكتشفوا متأخر.'},
+  amber: {name:'خلطة الدفء',key:'AMBER',notes:['عنبر','فانيلا','مسك ناعم'],message:'أنت من الناس اللي بيرجعوا إلهم لما الدنيا تتعب. مش لأنك بتعطي وعود، بل لأنك بتعطي دفء. عنبرك هو هالحضن اللي ما بيتغير — دافي، ثابت، موجود بلا شروط. يمكن ما بتحكي كثير عن حبك، بس كل اللي حواليك بيعرفوه من إحساسهم معك. وهاد، صدقني، أندر من أي كلمة حلوة.'},
+  wood: {name:'خلطة الجذور',key:'WOOD',notes:['صندل','أرز','فيتيفر'],message:'فيك شي نادر بهاد الزمن: إنك بتعرف كثير، وما بتحتاج تحكي. خشبك هو هالهدوء — دفء ما بيعلي صوته، بس كل اللي حواليك بيحسوا فيه. أنت الشخص اللي الناس بترتاح جنبه بلا ما تعرف ليش. هاد مو ضعف — هاد عمق. والعمق ما بينشاف، بينحس.'},
+  musk: {name:'خلطة النقاء',key:
